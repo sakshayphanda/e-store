@@ -1,8 +1,10 @@
+import { GlobalDataService } from './service/global-data.service';
+import { AuthServiceService } from './service/auth-service.service';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { AppComponent } from './app.component';
-import { RouterModule} from '@angular/router';
+import { RouterModule, Routes} from '@angular/router';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { TopNavigationComponent } from './top-navigation/top-navigation.component';
 import { LoginComponent } from './login/login.component';
@@ -18,16 +20,19 @@ import { OrderSuccessComponent } from './home/dynamic/order-success/order-succes
 import { MyOrdersComponent } from './home/dynamic/my-orders/my-orders.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { SideNavigationComponent } from './side-navigation/side-navigation.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthGuardService } from './service/auth-guard.service';
 
 
-const routes = [
+const routes: Routes = [
   {
     path: '',
     component: DynamicComponent
   },
   {
     path: 'check-out',
-    component: CheckOutComponent
+    component: CheckOutComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'products',
@@ -52,6 +57,10 @@ const routes = [
   {
     path: 'admin-products',
     component: AdminProductsComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 @NgModule({
@@ -75,10 +84,15 @@ const routes = [
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgbModule.forRoot()
 
   ],
-  providers: [],
+  providers: [
+    AuthServiceService,
+    GlobalDataService,
+    AuthGuardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

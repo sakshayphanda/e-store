@@ -1,13 +1,21 @@
 <div class="top-nav-bar">
 
+  <p>E-Store</p>
 
-  <button class="btn btn-primary drop" (click) = "openDropdown = !openDropdown">
-    username
-    <div class="dropdown-1" *ngIf = "openDropdown">
-      <a href = "#" class="option">1</a>
-      <a href = "#" class="option">2</a>
-      <a href = "#" class="option">3</a>
-
+  <ng-template #anonymousUser>
+    <button class="login-button" routerLink="/login" style="margin-left: 40px">
+      Login
+    </button>
+  </ng-template>
+  <div ngbDropdown class="dropdown" *ngIf="user$ | async as user; else anonymousUser">
+    <button ngbDropdownToggle class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{user.displayName}}
+    </button>
+    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" routerLink="/my-orders">My Orders</a>
+      <a class="dropdown-item" routerLink="/products">Products</a>
+      <a class="dropdown-item" (click)="logOut()">Logout</a>
     </div>
-  </button>
+  </div>
 </div>

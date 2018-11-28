@@ -1,3 +1,4 @@
+import { AuthServiceService } from './../../service/auth-service.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DynamicComponent implements OnInit {
 
-  constructor() { }
+  currentUserDetails;
+  constructor(private auth: AuthServiceService) { }
+
 
   ngOnInit() {
+  this.auth.userData.subscribe(
+    user => {
+      this.currentUserDetails = user;
+    }
+  );
   }
 
 }
