@@ -1,3 +1,4 @@
+import { AdminAuthGuardService } from './service/admin-auth-guard.service';
 import { GlobalDataService } from './service/global-data.service';
 import { AuthServiceService } from './service/auth-service.service';
 import { environment } from './../environments/environment';
@@ -22,6 +23,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { SideNavigationComponent } from './side-navigation/side-navigation.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuardService } from './service/auth-guard.service';
+import { UserService } from './service/user.service';
 
 
 const routes: Routes = [
@@ -44,19 +46,25 @@ const routes: Routes = [
   },
   {
     path: 'order-success',
-    component: OrderSuccessComponent
+    component: OrderSuccessComponent,
+    canActivate: [AuthGuardService]
+
   },
   {
     path: 'my-orders',
-    component: MyOrdersComponent
+    component: MyOrdersComponent,
+    canActivate: [AuthGuardService]
+
   },
   {
-    path: 'admin-orders',
-    component: AdminOrdersComponent
+    path: 'admin/admin-orders',
+    component: AdminOrdersComponent,
+    canActivate: [AuthGuardService, AdminAuthGuardService]
   },
   {
-    path: 'admin-products',
-    component: AdminProductsComponent
+    path: 'admin/admin-products',
+    component: AdminProductsComponent,
+    canActivate: [AuthGuardService, AdminAuthGuardService]
   },
   {
     path: 'login',
@@ -81,7 +89,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,{ useHash: true }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -91,7 +99,9 @@ const routes: Routes = [
   providers: [
     AuthServiceService,
     GlobalDataService,
-    AuthGuardService
+    AuthGuardService,
+    UserService,
+    AdminAuthGuardService
   ],
   bootstrap: [AppComponent]
 })

@@ -15,6 +15,11 @@
     <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" routerLink="/my-orders">My Orders</a>
       <a class="dropdown-item" routerLink="/products">Products</a>
+
+      <ng-container *ngIf = "adminAuthGuardService.adminEmail">
+      <a class="dropdown-item" routerLink="/admin/admin-orders">Admin Orders</a>
+      <a class="dropdown-item" routerLink="/admin/admin-products">Admin Products</a>
+    </ng-container>
       <a class="dropdown-item" (click)="logOut()">Logout</a>
     </div>
   </div>
