@@ -1,3 +1,4 @@
+import { CategoryService } from './service/category.service';
 import { AdminAuthGuardService } from './service/admin-auth-guard.service';
 import { GlobalDataService } from './service/global-data.service';
 import { AuthServiceService } from './service/auth-service.service';
@@ -24,6 +25,11 @@ import { SideNavigationComponent } from './side-navigation/side-navigation.compo
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuardService } from './service/auth-guard.service';
 import { UserService } from './service/user.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+
+import { FormsModule} from '@angular/forms';
+import { from } from 'rxjs';
+import { ProductService } from './service/product.service';
 
 
 const routes: Routes = [
@@ -67,6 +73,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService, AdminAuthGuardService]
   },
   {
+    path: 'admin/products/new',
+    component: ProductFormComponent,
+    canActivate: [AuthGuardService, AdminAuthGuardService]
+  },
+  {
     path: 'login',
     component: LoginComponent
   }
@@ -85,7 +96,8 @@ const routes: Routes = [
     OrderSuccessComponent,
     MyOrdersComponent,
     AdminOrdersComponent,
-    SideNavigationComponent
+    SideNavigationComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +105,8 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    FormsModule
 
   ],
   providers: [
@@ -101,7 +114,9 @@ const routes: Routes = [
     GlobalDataService,
     AuthGuardService,
     UserService,
-    AdminAuthGuardService
+    AdminAuthGuardService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
