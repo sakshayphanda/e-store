@@ -1,3 +1,24 @@
 <p>
-  shopping-cart works!
-</p>
+Total cost: {{cartService.totalCost}}</p>
+
+
+<p>Products</p>
+
+
+<div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tr *ngFor = "let product of products">
+          <td> {{product.payload.val().title}}</td>
+          <td> {{product.payload.val().price | currency:"INR":true}}</td>
+
+          <td>
+              <button class="btn btn-danger" (click) ="removeItem(product)">remove</button>
+            </td>
+        </tr>
+      </table>

@@ -30,12 +30,17 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { FormsModule} from '@angular/forms';
 import { from } from 'rxjs';
 import { ProductService } from './service/product.service';
+import { ShoppingCartService } from './service/shopping-cart.service';
 
 
 const routes: Routes = [
   {
     path: '',
     component: DynamicComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'check-out',
@@ -47,7 +52,7 @@ const routes: Routes = [
     component: ProductsComponent
   },
   {
-    path: 'Shopping-cart',
+    path: 'cart',
     component: ShoppingCartComponent
   },
   {
@@ -67,19 +72,21 @@ const routes: Routes = [
     component: AdminOrdersComponent,
     canActivate: [AuthGuardService, AdminAuthGuardService]
   },
-  {
-    path: 'admin/admin-products',
-    component: AdminProductsComponent,
-    canActivate: [AuthGuardService, AdminAuthGuardService]
-  },
+
   {
     path: 'admin/products/new',
     component: ProductFormComponent,
     canActivate: [AuthGuardService, AdminAuthGuardService]
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'admin/products/:id',
+    component: ProductFormComponent,
+    canActivate: [AuthGuardService, AdminAuthGuardService]
+  },
+  {
+    path: 'admin/admin-products',
+    component: AdminProductsComponent,
+    canActivate: [AuthGuardService, AdminAuthGuardService]
   }
 ];
 @NgModule({
@@ -116,7 +123,8 @@ const routes: Routes = [
     UserService,
     AdminAuthGuardService,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })

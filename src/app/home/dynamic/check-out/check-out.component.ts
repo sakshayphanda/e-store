@@ -1,4 +1,6 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ShoppingCartService } from 'src/app/service/shopping-cart.service';
 
 @Component({
   selector: 'app-check-out',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckOutComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private cartService: ShoppingCartService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
+    localStorage.setItem('returnUrl', this.router.url);
+
   }
 
 }

@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import { ProductService } from 'src/app/service/product.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -6,22 +7,52 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.sass']
 })
-export class AdminProductsComponent implements OnInit ,OnDestroy{
+export class AdminProductsComponent implements OnInit, OnDestroy {
 
-  products;
   productsSubscription;
-  constructor(private productService: ProductService) { }
+  productKeyValue = {};
+  objectKeys = Object.keys;
+
+  constructor(private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.loadProductsData();
+    // const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+   // localStorage.setItem();
 
-    this.productsSubscription = this.productService.getProducts().valueChanges().subscribe(
-      prod => {
-        this.products = prod;
-      }
-    );
+   console.log(this.router.url);
+
+   localStorage.setItem('returnUrl', this.router.url);
+
   }
 
-ngOnDestroy() {
-  this.productsSubscription.unsubscribe();
-}
+  loadProductsData() {
+    this.productKeyValue = {};
+
+    this.productsSubscription = this.productService.getProducts().snapshotChanges().subscribe(
+      items => { // i used snapshotChanges instead of ValueCHanges just to get the key of the object
+        items.forEach(
+          item => {
+            this.productKeyValue[item.key] = item.payload.val();
+
+          }
+        );
+      }
+    );
+
+    this.productService.productKeyValue = this.productKeyValue;
+
+  }
+  delete(itemKey) {
+    this.productService.delete(itemKey);
+    this.loadProductsData();
+
+    this.productService.productKeyValue = this.productKeyValue;
+  }
+
+  ngOnDestroy() {
+    this.productsSubscription.unsubscribe();
+  }
 }

@@ -1,9 +1,26 @@
 <button routerLink="/admin/products/new" class="btn btn-primary">New Products</button>
 
 
-<div>
-  <strong>Products</strong>
-  <ul>
-    <li *ngFor = "let prod of products">{{prod.category}}</li>
-  </ul>
+<div class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Categories</th>
+        <th>Title</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tr *ngFor = "let prodKey of objectKeys(productKeyValue)">
+      <td>{{productService.productKeyValue[prodKey].category}}</td>
+      <td>{{productService.productKeyValue[prodKey].title}}</td>
+
+      <td>{{productService.productKeyValue[prodKey].price}}</td>
+      <td>
+        <a [routerLink] = "['/admin/products/',prodKey]">edit</a>
+      </td>
+      <td>
+          <button class="btn btn-danger" (click)="delete(prodKey)">remove</button>
+        </td>
+    </tr>
+  </table>
 </div>

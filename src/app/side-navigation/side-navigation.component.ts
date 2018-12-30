@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingCartService } from '../service/shopping-cart.service';
 
 @Component({
   selector: 'app-side-navigation',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavigationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cartService : ShoppingCartService) { }
 
   ngOnInit() {
-  }
 
+  }
 }

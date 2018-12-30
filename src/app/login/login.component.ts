@@ -11,7 +11,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthServiceService, private globalData: GlobalDataService) { }
+  constructor(private auth: AuthServiceService) { }
 
   ngOnInit() {
 

@@ -1,3 +1,47 @@
-<p>
-  products works!
+<div class="welcome-msg">
+ <p *ngIf="user$ | async as currentUserDetails; else anonymousUser">
+  <strong> Welcome, {{currentUserDetails?.displayName}} <span style="color: rgb(24, 133, 133)" *ngIf="adminState">Admin</span> </strong>
 </p>
+
+<ng-template #anonymousUser>
+  <strong>Welcome, Guest</strong>
+</ng-template>
+</div>
+
+<div class="categories-menu">
+  <button *ngIf="categories.length"
+    (click)="currentCategory = 'All';openCategory('All');"
+    class="btn"
+    [class.btn-primary]="currentCategory==='All'"
+    [class.btn-outline-secondary]="currentCategory!=='All'"
+    >All
+  </button>
+  <button class="btn"
+    (click)="openCategory(category.name);currentCategory = category.name"
+    *ngFor="let category of categories"
+    [class.btn-primary]="category.name === currentCategory"
+    [class.btn-outline-secondary]="category.name !== currentCategory"
+    routerLink="/"
+    [queryParams]="{category: category.name}">{{category.name}}</button>
+</div>
+
+<div class="row products-container" style="display: flex; flex-wrap: wrap">
+
+  <ng-container *ngFor="let p of filteredProducts">
+    <div class="column">
+      <div class="card" style="width: 20rem; margin: 5px">
+        <img class="card-img-top" style="height: 65%;" [src]="p.imageUrl">
+
+        <div class="card-body">
+
+          <div class="flex">
+            <p class="product-title">{{p.title}}</p>
+            <strong >{{p.price | currency:"INR":true}}</strong>
+          </div>
+          <div  class="add-to-cart-btn"><button (click)="addToCart(p)" class="btn btn-primary">Add to cart</button></div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</div>

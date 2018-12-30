@@ -1,26 +1,29 @@
 <div class="top-nav-bar">
 
-  <p>E-Store</p>
+  <p class="title">E-Store</p>
 
+  <p class="cost">Total Cost : {{cartService.totalCost}}</p>
+  <button class="btn btn-outline-light" routerLink = "/check-out">checkout</button>
   <ng-template #anonymousUser>
-    <button class="login-button" routerLink="/login" style="margin-left: 40px">
+    <button class="login-button btn btn-outline-light" routerLink="/login">
       Login
     </button>
   </ng-template>
   <div ngbDropdown class="dropdown" *ngIf="user$ | async as user; else anonymousUser">
     <button ngbDropdownToggle class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{user.displayName}}
+      <img [src]="user.photoURL">
+      {{user.email}}
     </button>
-    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 100%">
       <a class="dropdown-item" routerLink="/my-orders">My Orders</a>
       <a class="dropdown-item" routerLink="/products">Products</a>
 
-      <ng-container *ngIf = "adminAuthGuardService.adminEmail">
+      <ng-container *ngIf = "isAdminAccount">
       <a class="dropdown-item" routerLink="/admin/admin-orders">Admin Orders</a>
       <a class="dropdown-item" routerLink="/admin/admin-products">Admin Products</a>
     </ng-container>
-      <a class="dropdown-item" (click)="logOut()">Logout</a>
+      <a class="dropdown-item" style="cursor: pointer" (click)="logOut()">Logout</a>
     </div>
   </div>
 </div>

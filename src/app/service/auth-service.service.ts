@@ -23,13 +23,13 @@ export class AuthServiceService {
 
   logOut() {
     this.afAuth.auth.signOut();
+    localStorage.removeItem('cartId');
+    localStorage.removeItem('returnUrl');
   }
 
   get appUser(): Observable<any> {
-    if(this.userData) {
     return this.userData.switchMap(
       user => this.userService.get(user.uid) // getting the object of the current logged in user
     );
-    }
   }
 }

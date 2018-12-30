@@ -1,7 +1,8 @@
 import { CategoryService } from './../../service/category.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'app-product-form',
@@ -10,10 +11,13 @@ import { Router } from '@angular/router';
 })
 export class ProductFormComponent implements OnInit , OnDestroy{
   categories;
+  productDetails;
   categoryList;
+  id;
 
   constructor(private categoryService: CategoryService,
     private router: Router,
+    private route: ActivatedRoute,
     private productService: ProductService) { }
 
   ngOnInit() {
@@ -23,6 +27,15 @@ export class ProductFormComponent implements OnInit , OnDestroy{
         this.categoryList = value;
       }
     );
+
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id) {
+      this.productService.getProduct(this.id).valueChanges().take(1).subscribe(
+        item => {
+          this.productDetails = item;
+        }
+      );
+    }
   }
 
   save(formValue) {
@@ -30,6 +43,11 @@ export class ProductFormComponent implements OnInit , OnDestroy{
     this.router.navigate(['/admin/admin-products']);
   }
 
+  update(formValue) {
+    this.productService.update(formValue, this.id);
+    this.router.navigate(['/admin/admin-products']);
+
+  }
   ngOnDestroy() {
     this.categories.unsubscribe();
   }

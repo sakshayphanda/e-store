@@ -1,6 +1,6 @@
 import { CanActivate } from '@angular/router';
 import { AuthServiceService } from './auth-service.service';
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { UserService } from './user.service';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AdminAuthGuardService implements CanActivate {
 // to check whether the logged in user is an admin or not
-  adminEmail;
+@Output() adminEmail = new EventEmitter();
   constructor(private authService: AuthServiceService) { }
 
 
