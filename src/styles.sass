@@ -1,6 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~bootstrap/dist/css/bootstrap.css"
+$font-family: 'Open Sans','Source Sans Pro', 'Poppins', Helvetica, Tahoma
+
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  font-family: $font-family
+  -webkit-user-select: text
+  -moz-user-select: text
+  -ms-user-select: text
+  user-select: text
+  -webkit-font-smoothing: antialiased
+  ::-webkit-scrollbar
+    width: 6px
+    height: 6px
+    background-color: transparentize(grey, 0.9)
+  ::-webkit-scrollbar-thumb
+    width: 4px
+    border-radius: 20px
+    background-color: transparentize(grey, 0.6)
 
 .btn:focus.btn:actived
    outline: none !important

@@ -33,8 +33,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
-   // localStorage.setItem('returnUrl', this.router.url);
-    console.log(this.currentCategory,'init called');
+    localStorage.setItem('returnUrl', '/products');
+    console.log(this.currentCategory);
     this.user$ = this.authService.userData;
 
     this.categoryService.getCategories().valueChanges().subscribe(

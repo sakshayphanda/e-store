@@ -3,6 +3,9 @@
   position: absolute
   top: 0
   z-index: 1
+  -webkit-box-shadow: 0 17px 25px rgba(0,0,0,0.25)
+  -moz-box-shadow: 0 17px 25px rgba(0,0,0,0.25)
+  box-shadow: 0 17px 25px rgba(0,0,0,0.25)
   width: 100vw
 
 
@@ -13,12 +16,18 @@
   width: 200px
   z-index: 1
   position: absolute
-  left: 0
-  top: 50px
-  height: calc(100vh - 50px)
+  left: 10px
+  display: flex
+  justify-content: center
+  border: 1px solid #c6c6c6
+  -webkit-box-shadow: 0 17px 25px rgba(0,0,0,0.18)
+  -moz-box-shadow: 0 17px 25px rgba(0,0,0,0.18)
+  box-shadow: 0 17px 25px rgba(0,0,0,0.18)
+  top: 80px
+  height: calc(100vh - 80px)
 
 .dynamic
-  width: calc(100vw - 200px)
+  width: calc(100vw - 220px)
   height: calc(100vh - 50px)
   background: white
   padding: 15px

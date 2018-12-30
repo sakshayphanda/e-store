@@ -16,7 +16,7 @@ export class AuthServiceService {
 
   userData: Observable<firebase.User> = this.afAuth.authState;
   login() {
-    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+    const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
     localStorage.setItem('returnUrl', returnUrl);
     this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }

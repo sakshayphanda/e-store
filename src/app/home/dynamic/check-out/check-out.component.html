@@ -1,3 +1,21 @@
-<button class="btn btn-warning">
-  Pay : {{cartService.totalCost}}
-</button>
+<div class="row">
+  <div class="col-md-6">
+    <form #formValue ="ngForm" (ngSubmit) ="addOrderToDb(formValue.value)">
+      <div class="form-group">
+          <input #address="ngModel" ngModel name= "address" class="form-control" type="text" placeholder="Address" id="address">
+      </div>
+      <div class="form-group">
+      <input #pin="ngModel" ngModel name="pin" class="form-control" type="number" placeholder="pin code">
+    </div>
+
+    <button type="submit" class="btn btn-warning">
+        Pay {{cartService.totalCost | currency:"INR":true}}
+      </button>
+    </form>
+  </div>
+  <div class="col-md-6"></div>
+</div>
+
+
+
+
