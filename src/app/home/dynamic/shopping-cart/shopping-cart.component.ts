@@ -11,6 +11,7 @@ export class ShoppingCartComponent implements OnInit {
 
   products = [];
   cartId;
+  totalCost = 0;
 
   constructor(private cartService: ShoppingCartService,
     private router: Router) { }
@@ -27,6 +28,7 @@ export class ShoppingCartComponent implements OnInit {
         this.products.forEach(
           pro => {
             this.cartService.totalCost = this.cartService.totalCost + pro.payload.val().price;
+            this.totalCost = this.cartService.totalCost;
           }
        );
       }

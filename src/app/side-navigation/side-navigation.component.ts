@@ -8,9 +8,20 @@ import { ShoppingCartService } from '../service/shopping-cart.service';
 })
 export class SideNavigationComponent implements OnInit {
 
-  constructor(private cartService : ShoppingCartService) { }
+  itemsInCart;
+  cartId: string;
+  constructor(private cartService: ShoppingCartService) {
+   }
 
   ngOnInit() {
-
+    this.cartId = localStorage.getItem('cartId');
+    this.cartService.getCartProducts(this.cartId).snapshotChanges().subscribe(
+      product => {
+        console.log('product', product);
+        this.cartService.totalCost = 0;
+        this.cartService.noOfProducts = product.length;
+        this.itemsInCart = this.cartService.noOfProducts;
+      }
+    );
   }
 }

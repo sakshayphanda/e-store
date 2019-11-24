@@ -15,6 +15,7 @@ export class TopNavigationComponent implements OnInit {
   user$: Observable<firebase.User>;
   isAdminAccount = false;
   products;
+  totalCost = 0;
 
   constructor(
     private auth: AuthServiceService,
@@ -40,6 +41,9 @@ export class TopNavigationComponent implements OnInit {
           pro => {
             console.log('price', pro.price);
             this.cartService.totalCost = this.cartService.totalCost + pro.price;
+
+            this.totalCost = this.cartService.totalCost;
+
           }
        );
       }

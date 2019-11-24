@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ShoppingCartService {
 
   totalCost = 0;
-  noOfProducts;
+  noOfProducts = 0;
   constructor(private db: AngularFireDatabase) { }
 
 
