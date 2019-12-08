@@ -21,8 +21,7 @@ export class HomeComponent implements OnInit {
         } else {
         this.showMenu = !this.showMenu;
       }
+    }
     );
-  }
-
-
+}
 }

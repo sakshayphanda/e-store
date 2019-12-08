@@ -11,8 +11,7 @@ export class ShoppingCartService {
   constructor(private db: AngularFireDatabase) { }
 
 
-  createShoppingCart(user) {
-    console.log(user);
+  createShoppingCart() {
     return this.db.list('/shopping-cart').push( // returns the key of the added cart
       {
         dateCreated : new Date().getDate()
