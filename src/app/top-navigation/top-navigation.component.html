@@ -7,22 +7,23 @@
 
 
   <p class="cost">Total Cost : {{totalCost}}</p>
+  <button class="btn btn-outline-light" routerLink = "/check-out">checkout</button>
   <ng-template #anonymousUser>
     <button class="login-button btn btn-outline-light" routerLink="/login">
       Login
     </button>
   </ng-template>
-  <div ngbDropdown class="dropdown" *ngIf="isAdminAccount && user$ | async as user; else anonymousUser">
-    <button ngbDropdownToggle class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+  <ng-container ngbDropdown class="dropdown" *ngIf="user$ | async as user; else anonymousUser">
+    <button *ngIf = "isAdminAccount" ngbDropdownToggle class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <img [src]="user.photoURL">
+      <!-- <img [src]="user.photoURL"> -->
     </button>
-    <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 100%">
+    <div *ngIf = "isAdminAccount" ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 100%">
 
-      <ng-container *ngIf = "isAdminAccount">
+      <ng-container>
       <a class="dropdown-item" routerLink="/admin/admin-orders">Admin Orders</a>
       <a class="dropdown-item" routerLink="/admin/admin-products">Admin Products</a>
     </ng-container>
     </div>
-  </div>
+  </ng-container>
 </div>
