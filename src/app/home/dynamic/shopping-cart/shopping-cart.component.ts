@@ -25,12 +25,18 @@ export class ShoppingCartComponent implements OnInit {
         this.products = product;
         this.cartService.totalCost = 0;
         this.cartService.noOfProducts = this.products.length;
+        if(this.products.length) {
         this.products.forEach(
           pro => {
             this.cartService.totalCost = this.cartService.totalCost + pro.payload.val().price;
             this.totalCost = this.cartService.totalCost;
           }
        );
+        } else {
+          this.totalCost = 0;
+          this.cartService.totalCost = 0;
+          this.cartService.noOfProducts = 0;
+        }
       }
     );
 

@@ -15,7 +15,7 @@ import { GlobalDataService } from '../service/global-data.service';
 export class TopNavigationComponent implements OnInit {
   user$: Observable<firebase.User>;
   isAdminAccount = false;
-  products;
+  products = [];
   totalCost = 0;
   showMenuButton = false;
 
@@ -53,9 +53,10 @@ export class TopNavigationComponent implements OnInit {
 
         this.cartService.totalCost = 0;
         this.products = product;
-
-        console.log(product);
-
+        if(!this.products.length) {
+          this.totalCost = 0;
+          return;
+        }
         this.products.forEach(
           pro => {
             console.log('price', pro.price);
