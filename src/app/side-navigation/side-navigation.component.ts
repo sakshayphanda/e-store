@@ -31,4 +31,10 @@ export class SideNavigationComponent implements OnInit {
       }
     );
   }
+
+  logOut() {
+    this.auth.logOut(); // logging out of the application
+    window.location.reload(); // reloading the webpage when the logout is clicked
+  }
+
 }

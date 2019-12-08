@@ -3,8 +3,15 @@
     <img [src]="user.photoURL">
     <p class="email">{{user.email}}</p>
   </div>
-  <button class="btn btn btn-outline-primary" routerLink="/">Home</button>
+  <button (click) ="$event.stopPropagation()" class="btn btn btn-outline-primary" routerLink="/">Home</button>
 
-  <button class="btn btn btn-outline-primary" routerLink="/cart">Shopping Cart ({{itemsInCart}})</button>
+  <button (click) ="$event.stopPropagation()" class="btn btn btn-outline-primary" routerLink="/cart">Shopping Cart ({{itemsInCart}})</button>
+
+  <button (click) ="$event.stopPropagation()"class="btn btn btn-outline-primary" routerLink="/my-orders">My Orders</button>
+
+  <button (click) ="$event.stopPropagation()" class="btn btn btn-outline-primary" routerLink="/products">Products</button>
+
+  <button (click) ="$event.stopPropagation(); logOut()" class="btn btn btn-outline-primary"  >Logout</button>
+
 
 </div>

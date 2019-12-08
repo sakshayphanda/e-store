@@ -14,6 +14,22 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    window.addEventListener('click', (event) => {
+      let wid = window.innerWidth;
+
+      if(wid < 900) {
+      if(event.target['parentElement']['id'] !== 'side' &&
+      event.target !== document.getElementById('side') &&
+      event.target !== document.getElementById('menu')) {
+        if(this.showMenu) {
+        this.showMenu = false;
+        }
+      }
+    }
+    });
+
+
     this.globalData.toggleMenu.subscribe(
       response => {
         if(response === 'show') {
