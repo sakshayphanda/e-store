@@ -88,7 +88,6 @@ export class TopNavigationComponent implements OnInit {
     );
     this.adminAuthGuardService.adminEmail.subscribe(
       state => {
-        console.log(state);
         this.isAdminAccount = state;
       }
     );

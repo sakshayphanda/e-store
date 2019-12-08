@@ -1,6 +1,10 @@
 <div class="container">
-<button class="btn btn btn-outline-primary" routerLink="/">Home</button>
+  <div class="image-container" *ngIf="user$ | async as user">
+    <img [src]="user.photoURL">
+    <p class="email">{{user.email}}</p>
+  </div>
+  <button class="btn btn btn-outline-primary" routerLink="/">Home</button>
 
-<button class="btn btn btn-outline-primary" routerLink = "/cart">Shopping Cart ({{itemsInCart}})</button>
+  <button class="btn btn btn-outline-primary" routerLink="/cart">Shopping Cart ({{itemsInCart}})</button>
 
 </div>

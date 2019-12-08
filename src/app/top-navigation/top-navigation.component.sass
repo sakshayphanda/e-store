@@ -11,9 +11,11 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
     font-size: 2rem
   .dropdown
-    position: absolute
     height: 100%
     right: 0px
+    position: absolute
+    .dropdown-menu
+      left: -98px !important
     .btn
       height: 100%
       img
@@ -32,6 +34,10 @@
 
 @media screen and (max-width: 680px)
 
+  .dropdown
+    height: 54% !important
+    right: 0
+    max-width: 186px
   .top-nav-bar
     justify-content: space-evenly
   .cost

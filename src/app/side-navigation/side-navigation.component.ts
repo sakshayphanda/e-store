@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../service/shopping-cart.service';
+import { AuthServiceService } from '../service/auth-service.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-side-navigation',
@@ -10,10 +12,15 @@ export class SideNavigationComponent implements OnInit {
 
   itemsInCart;
   cartId: string;
-  constructor(private cartService: ShoppingCartService) {
+  user$: Observable<firebase.User>;
+
+  constructor(private cartService: ShoppingCartService,
+    private auth: AuthServiceService
+    ) {
    }
 
   ngOnInit() {
+    this.user$ = this.auth.userData;
     this.cartId = localStorage.getItem('cartId');
     this.cartService.getCartProducts(this.cartId).snapshotChanges().subscribe(
       product => {
