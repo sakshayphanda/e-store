@@ -34,12 +34,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     localStorage.setItem('returnUrl', '/products');
-    console.log(this.currentCategory);
     this.user$ = this.authService.userData;
 
     this.categoryService.getCategories().valueChanges().subscribe(
       categories => {
-        console.log(categories,'categories');
         this.categories = categories;
       }
     );
@@ -52,7 +50,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   openCategory(cat: string) {
-    console.log('cat',cat);
     this.filteredProducts = this.unFilteredProducts;
     if (cat === 'All') {
       this.filteredProducts = this.unFilteredProducts;
@@ -66,7 +63,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
     );
   }
-    console.log(this.filteredProducts, 'filtered Products');
   }
   loadProductsData() {
     this.productKeyValue = {};
@@ -76,10 +72,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
         items.forEach(
           item => {
             this.productKeyValue[item.key] = item.payload.val();
-            console.log(this.productKeyValue);
 
             this.unFilteredProducts.push(item.payload.val());
-            console.log(this.unFilteredProducts, 'filtered Products');
 
             this.filteredProducts = this.unFilteredProducts;
 
