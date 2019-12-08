@@ -5,6 +5,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/internal/Observable';
 import { ShoppingCartService } from '../service/shopping-cart.service';
+import { GlobalDataService } from '../service/global-data.service';
 
 @Component({
   selector: 'app-top-navigation',
@@ -16,15 +17,33 @@ export class TopNavigationComponent implements OnInit {
   isAdminAccount = false;
   products;
   totalCost = 0;
+  showMenuButton = false;
 
   constructor(
     private auth: AuthServiceService,
     private router: Router,
     private adminAuthGuardService: AdminAuthGuardService,
     private activatedRoute: ActivatedRoute,
+    private globalData: GlobalDataService,
     private cartService: ShoppingCartService) { }
 
   ngOnInit() {
+    let wid = window.innerWidth;
+    if(wid < 900) {
+      this.showMenuButton = true;
+    } else {
+      this.showMenuButton = false;
+    }
+    window.addEventListener('resize', (event) => {
+      const width = event['currentTarget']['innerWidth'];
+
+      if(width < 900) {
+        this.showMenuButton = true;
+      } else {
+        this.showMenuButton = false;
+        this.globalData.toggleMenu.emit('show');
+      }
+    });
     this.user$ = this.auth.userData;
     console.log(this.user$, 'Current user information');
 
@@ -83,6 +102,10 @@ export class TopNavigationComponent implements OnInit {
   logOut() {
     this.auth.logOut(); // logging out of the application
     window.location.reload(); // reloading the webpage when the logout is clicked
+  }
+
+  toggleSideMenu() {
+    this.globalData.toggleMenu.emit(true);
   }
 
 }

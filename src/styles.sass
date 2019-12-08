@@ -21,6 +21,15 @@ $font-family: 'Open Sans','Source Sans Pro', 'Poppins', Helvetica, Tahoma
     width: 4px
     border-radius: 20px
     background-color: transparentize(grey, 0.6)
+html
+  font-size: 15px
+@media screen and (min-width: 320px)
+  html
+    font-size: calc(10px + 4 * ((100vw - 320px) / 680))
+
+@media screen and (min-width: 1840px)
+  html
+    font-size: 22px
 
 .btn:focus.btn:actived
    outline: none !important

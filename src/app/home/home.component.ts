@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalDataService } from '../service/global-data.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  showMenu = true;
+  constructor(
+    private globalData: GlobalDataService
+  ) { }
 
   ngOnInit() {
+    this.globalData.toggleMenu.subscribe(
+      response => {
+        if(response === 'show') {
+          this.showMenu = true;
+        } else {
+        this.showMenu = !this.showMenu;
+      }
+    );
   }
+
 
 }

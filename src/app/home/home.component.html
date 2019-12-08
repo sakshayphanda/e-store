@@ -2,7 +2,7 @@
   <app-top-navigation></app-top-navigation>
 </div>
 
-<div class="side-navigation">
+<div *ngIf="showMenu" class="side-navigation">
   <app-side-navigation></app-side-navigation>
 </div>
 <div class="dynamic" style="padding: 20px">

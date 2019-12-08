@@ -1,6 +1,10 @@
 <div class="top-nav-bar">
 
+  <button *ngIf="showMenuButton" (click) = "toggleSideMenu()" class="btn btn-outline-light">
+    Menu
+  </button>
   <p class="title">E-Store</p>
+
 
   <p class="cost">Total Cost : {{totalCost}}</p>
   <button class="btn btn-outline-light" routerLink = "/check-out">checkout</button>
