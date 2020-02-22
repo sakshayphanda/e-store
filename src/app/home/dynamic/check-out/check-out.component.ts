@@ -11,7 +11,7 @@ import { ShoppingCartService } from 'src/app/service/shopping-cart.service';
 export class CheckOutComponent implements OnInit {
 
   items;
-  totalCost = 0;
+  cartItems = {};
   constructor(
     private cartService: ShoppingCartService,
     private router: Router,
@@ -20,13 +20,7 @@ export class CheckOutComponent implements OnInit {
 
   ngOnInit() {
     localStorage.setItem('returnUrl', this.router.url);
-    this.cartService.getCartProducts(localStorage.getItem('cartId')).valueChanges().subscribe(
-      items => {
-        this.totalCost = this.cartService.totalCost;
-        this.items = items;
-      }
-    );
-
+    this.cartItems = this.cartService.productsInCart;
   }
 
   addOrderToDb(formValue) {

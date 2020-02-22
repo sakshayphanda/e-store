@@ -1,14 +1,18 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
+import { Icart } from '../interfaces/Icart';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
-
-  totalCost = 0;
-  noOfProducts = 0;
-  constructor(private db: AngularFireDatabase) { }
+  productsInCart = {
+    totalCost: 0,
+    length: 0,
+    productDetails: []
+  };
+  constructor(private db: AngularFireDatabase) {
+   }
 
 
   createShoppingCart() {
@@ -23,12 +27,38 @@ export class ShoppingCartService {
     this.db.object('/shopping-cart/' + cartid + '/items/' + product.title + new Date().getTime()).update(product);
   }
 
-  getCartProducts(Uid) {
-    return this.db.list('/shopping-cart/' + Uid + '/items/');
+  getCartProducts() {
+    const uid = localStorage.getItem('userId');
+    if (uid) {
+    this.db.list('/shopping-cart/' + uid + '/items/').snapshotChanges().subscribe(
+      products => {
+        const productDetails = [];
+        let totalCost = 0;
+        products.forEach(
+          product => {
+            totalCost = totalCost + product.payload.val()['price'];
+            productDetails.push({
+              key: product.key,
+              value: product.payload.val()
+            });
+
+          }
+       );
+       this.productsInCart['totalCost'] = totalCost;
+       this.productsInCart['length'] = products.length;
+       this.productsInCart['productDetails'] = productDetails;
+      }
+    );
+    }
   }
 
-  removeItem(cartId,productKey) {
-    this.db.object('/shopping-cart/' + cartId + '/items/' + productKey).remove();
+  removeItem(productKey) {
+    const uid = localStorage.getItem('userId');
+    this.db.object('/shopping-cart/' + uid + '/items/' + productKey).remove();
+  }
+
+  dispose() {
+
   }
 
 }

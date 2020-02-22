@@ -1,5 +1,5 @@
 <p>
-Total cost: {{totalCost}}</p>
+Total cost: {{productsInCart['totalCost']}}</p>
 
 
 <p>Products</p>
@@ -13,12 +13,12 @@ Total cost: {{totalCost}}</p>
           <th>Price</th>
         </tr>
       </thead>
-      <tr *ngFor = "let product of products">
-          <td> {{product.payload.val().title}}</td>
-          <td> {{product.payload.val().price | currency:"INR":true}}</td>
+      <tr *ngFor = "let product of productsInCart['productDetails']">
+          <td> {{product['value'].title}}</td>
+          <td> {{product['value'].price | currency:"INR":true}}</td>
 
           <td>
-              <button class="btn btn-danger" (click) ="removeItem(product)">remove</button>
+              <button class="btn btn-danger" (click) ="removeItem(product['key'])">remove</button>
             </td>
         </tr>
       </table>

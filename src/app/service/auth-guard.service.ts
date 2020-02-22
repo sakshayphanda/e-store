@@ -7,18 +7,16 @@ import 'rxjs/add/operator/map';
   providedIn: 'root'
 })
 export class AuthGuardService implements CanActivate {
-
-  // to check whether the user is logged in or not
-  constructor(private auth: AuthServiceService, private router: Router) { }
-
+  constructor(private auth: AuthServiceService, private router: Router) {}
 
   canActivate(route, state: RouterStateSnapshot) {
-    return this.auth.userData.map(
-      user => {
-        if (user) { return true; } // if user is logged in than show this component
-          this.router.navigate(['/login'],{ queryParams: {returnUrl: state.url}});
-          return false; // otherwise take him to the login page.
-      }
-    );
+    if (this.auth.userData['isLoggedIn']) {
+      return true;
+    } else {
+      this.router.navigate(['/login'], {
+        queryParams: { returnUrl: state.url }
+      });
+      return false;
+    }
   }
 }

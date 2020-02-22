@@ -9,8 +9,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
-  productsSubscription;
-  productKeyValue = {};
+  productDetails = {};
   objectKeys = Object.keys;
 
   constructor(private productService: ProductService,
@@ -18,41 +17,21 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadProductsData();
     // const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
    // localStorage.setItem();
-
-   console.log(this.router.url);
-
    localStorage.setItem('returnUrl', this.router.url);
+   this.loadProductsData();
 
   }
 
   loadProductsData() {
-    this.productKeyValue = {};
-
-    this.productsSubscription = this.productService.getProducts().snapshotChanges().subscribe(
-      items => { // i used snapshotChanges instead of ValueCHanges just to get the key of the object
-        items.forEach(
-          item => {
-            this.productKeyValue[item.key] = item.payload.val();
-
-          }
-        );
-      }
-    );
-
-    this.productService.productKeyValue = this.productKeyValue;
+    this.productDetails = this.productService.productDetails;
 
   }
   delete(itemKey) {
     this.productService.delete(itemKey);
-    this.loadProductsData();
-
-    this.productService.productKeyValue = this.productKeyValue;
   }
 
   ngOnDestroy() {
-    this.productsSubscription.unsubscribe();
   }
 }

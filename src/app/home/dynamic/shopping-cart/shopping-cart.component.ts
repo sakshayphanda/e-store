@@ -9,41 +9,17 @@ import { Router } from '@angular/router';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  products = [];
-  cartId;
-  totalCost = 0;
-
+  productsInCart = {};
   constructor(private cartService: ShoppingCartService,
     private router: Router) { }
 
   ngOnInit() {
-    this.cartId = localStorage.getItem('cartId');
     localStorage.setItem('returnUrl', this.router.url);
-
-    this.cartService.getCartProducts(this.cartId).snapshotChanges().subscribe(
-      product => {
-        this.products = product;
-        this.cartService.totalCost = 0;
-        this.cartService.noOfProducts = this.products.length;
-        if(this.products.length) {
-        this.products.forEach(
-          pro => {
-            this.cartService.totalCost = this.cartService.totalCost + pro.payload.val().price;
-            this.totalCost = this.cartService.totalCost;
-          }
-       );
-        } else {
-          this.totalCost = 0;
-          this.cartService.totalCost = 0;
-          this.cartService.noOfProducts = 0;
-        }
-      }
-    );
-
-
+    this.productsInCart = this.cartService.productsInCart;
+    console.log(this.productsInCart);
   }
   removeItem(productKey) {
-    this.cartService.removeItem(this.cartId, productKey.key);
+    this.cartService.removeItem(productKey);
   }
 
 }

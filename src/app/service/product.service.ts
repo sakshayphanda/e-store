@@ -6,7 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class ProductService {
 
-  productKeyValue = {};
+  productDetails = {
+    products: {},
+    categories: [],
+    unFilteredProducts: []
+  };
 
   constructor(private db: AngularFireDatabase) { }
 
@@ -22,7 +26,35 @@ export class ProductService {
     this.db.object('/products/' + id).remove();
   }
   getProducts() {
-    return this.db.list('/products');
+    const promise = new Promise((resolve, reject) => {
+    this.getCategories();
+    this.db.list('/products').snapshotChanges().subscribe(
+      products => { // used snapshotChanges instead of ValueCHanges just to get the key of the object
+        console.log(products);
+        this.productDetails['products'] = [];
+        this.productDetails['unFilteredProducts'] = [];
+        products.forEach(
+            product => {
+              this.productDetails['products'][product.key] = product.payload.val();
+              this.productDetails['unFilteredProducts'].push(product.payload.val());
+            }
+          );
+
+          resolve();
+        }
+      );
+
+    });
+
+      return promise;
+  }
+
+  getCategories() {
+    this.db.list('/categories', ref => ref.orderByChild('name')).valueChanges().subscribe(
+      categories => {
+        this.productDetails['categories'] = categories;
+      }
+    );
   }
 
   getProduct(id: string) {

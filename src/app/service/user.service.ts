@@ -7,17 +7,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-// saving and getting the user data to the firebase database
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private angularFireDatabase: AngularFireDatabase) { }
 
-  save(user: firebase.User) {
-    this.db.object('/userDetails/' + user.uid).update({
+  createUser() {
+  }
+
+  readUserData(userId): Observable<any> {
+    return this.angularFireDatabase.object('/userDetails/'  + userId).valueChanges();
+  }
+
+  updateUser(user: firebase.User) {
+    this.angularFireDatabase.object('/userDetails/' + user.uid).update({
       name: user.displayName,
       email: user.email
     });
   }
 
-  get(userId): Observable<any> {
-    return this.db.object('/userDetails/'  + userId).valueChanges();
+  deleteUser() {
   }
 }

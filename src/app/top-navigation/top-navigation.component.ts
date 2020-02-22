@@ -1,4 +1,3 @@
-import { AdminAuthGuardService } from './../service/admin-auth-guard.service';
 import { AuthServiceService } from './../service/auth-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -18,18 +17,30 @@ export class TopNavigationComponent implements OnInit {
   products = [];
   totalCost = 0;
   showMenuButton = false;
+  productsInCart = {};
+  userData = {};
 
   constructor(
-    private auth: AuthServiceService,
+    private authService: AuthServiceService,
     private router: Router,
-    private adminAuthGuardService: AdminAuthGuardService,
     private activatedRoute: ActivatedRoute,
     private globalData: GlobalDataService,
     private cartService: ShoppingCartService) { }
 
   ngOnInit() {
-    let wid = window.innerWidth;
-    if(wid < 900) {
+    this.mobileResponsiveness();
+    this.productsInCart =  this.cartService.productsInCart;
+    this.userData = this.authService.userData;
+
+    if (this.userData['isLoggedIn']) {
+      this.router.navigate([''], {
+        relativeTo: this.activatedRoute
+      });
+    }
+  }
+
+  mobileResponsiveness() {
+    if (window.innerWidth < 900) {
       this.showMenuButton = true;
     } else {
       this.showMenuButton = false;
@@ -37,71 +48,18 @@ export class TopNavigationComponent implements OnInit {
     window.addEventListener('resize', (event) => {
       const width = event['currentTarget']['innerWidth'];
 
-      if(width < 900) {
+      if (width < 900) {
         this.showMenuButton = true;
       } else {
         this.showMenuButton = false;
         this.globalData.toggleMenu.emit('show');
       }
     });
-    this.user$ = this.auth.userData;
-    console.log(this.user$, 'Current user information');
-
-    if(localStorage.getItem('cartId')) {
-    this.cartService.getCartProducts(localStorage.getItem('cartId')).valueChanges().subscribe(
-      product => {
-
-        this.cartService.totalCost = 0;
-        this.products = product;
-        if(!this.products.length) {
-          this.totalCost = 0;
-          return;
-        }
-        this.products.forEach(
-          pro => {
-            console.log('price', pro.price);
-            this.cartService.totalCost = this.cartService.totalCost + pro.price;
-
-            this.totalCost = this.cartService.totalCost;
-
-          }
-       );
-      }
-    );
-    }
-
-    this.user$.subscribe(
-      userInfo => {
-
-        console.log(userInfo, 'Current user information');
-
-        if (userInfo) {
-          this.auth.appUser.subscribe( // checking if the logged in user has isLogged in key as true(ie he is an admin)
-            user => {
-              if (user.isAdmin) {
-                this.adminAuthGuardService.adminEmail.emit(true);
-              }
-            }
-          );
-        }
-      }
-    );
-    this.adminAuthGuardService.adminEmail.subscribe(
-      state => {
-        this.isAdminAccount = state;
-      }
-    );
-
-    if (this.user$) { // if there is a logged in user take him to the dynamic component
-      this.router.navigate([''], {
-        relativeTo: this.activatedRoute
-      });
-    }
   }
 
   logOut() {
-    this.auth.logOut(); // logging out of the application
-    window.location.reload(); // reloading the webpage when the logout is clicked
+    this.authService.logOut();
+    window.location.reload();
   }
 
   toggleSideMenu() {

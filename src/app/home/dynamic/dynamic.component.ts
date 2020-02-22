@@ -6,18 +6,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './dynamic.component.html',
   styleUrls: ['./dynamic.component.sass']
 })
-export class DynamicComponent implements OnInit {
-
-  currentUserDetails;
-  constructor(private auth: AuthServiceService) { }
-
-
-  ngOnInit() {
-  this.auth.userData.subscribe(
-    user => {
-      this.currentUserDetails = user;
-    }
-  );
-  }
-
+export class DynamicComponent{
 }

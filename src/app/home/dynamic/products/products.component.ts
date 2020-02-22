@@ -23,6 +23,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   unFilteredProducts = [];
   objectKeys = Object.keys;
   currentCategory = 'All';
+  productDetails = {};
   constructor(
     private authService: AuthServiceService,
     private adminService: AdminAuthGuardService,
@@ -34,26 +35,28 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     localStorage.setItem('returnUrl', '/products');
-    this.user$ = this.authService.userData;
+    this.user$ = this.authService.user;
 
-    this.categoryService.getCategories().valueChanges().subscribe(
-      categories => {
-        this.categories = categories;
-      }
-    );
+    this.productDetails = this.productService.productDetails;
+    this.filteredProducts = this.productDetails['unFilteredProducts'];
 
     this.adminService.adminEmail.subscribe(
       isAdmin => this.adminState = isAdmin
     );
+    this.loadProducts();
+  }
 
-    this.loadProductsData();
+  loadProducts() {
+    this.productService.getProducts().then(
+    (response) => {
+      this.openCategory(this.currentCategory);
+    });
   }
 
   openCategory(cat: string) {
-    this.filteredProducts = this.unFilteredProducts;
+    this.filteredProducts = this.productDetails['unFilteredProducts'];
     if (cat === 'All') {
-      this.filteredProducts = this.unFilteredProducts;
-
+      return;
     } else {
     this.filteredProducts = this.filteredProducts.filter(
       p => {
@@ -64,35 +67,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
     );
   }
   }
-  loadProductsData() {
-    this.productKeyValue = {};
-
-    this.productsSubscription = this.productService.getProducts().snapshotChanges().subscribe(
-      items => { // i used snapshotChanges instead of ValueCHanges just to get the key of the object
-        items.forEach(
-          item => {
-            this.productKeyValue[item.key] = item.payload.val();
-
-            this.unFilteredProducts.push(item.payload.val());
-
-            this.filteredProducts = this.unFilteredProducts;
-
-          }
-        );
-      }
-    );
-
-    this.productService.productKeyValue = this.productKeyValue;
-
-  }
 
   addToCart(product) {
-    const cartId = localStorage.getItem('cartId');
+    const cartId = localStorage.getItem('userId');
     if (!cartId) {
       this.cartService.createShoppingCart().then(
         cart => {
-          localStorage.setItem('cartId', cart.key);
-          this.cartService.addProductsToCart(localStorage.getItem('cartId'), product);
+          localStorage.setItem('userId', cart.key);
+          this.cartService.getCartProducts();
+
+          this.cartService.addProductsToCart(localStorage.getItem('userId'), product);
 
         }
       );
@@ -104,6 +88,5 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.productsSubscription.unsubscribe();
   }
 }

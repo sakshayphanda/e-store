@@ -28,10 +28,10 @@ import { UserService } from './service/user.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 
 import { FormsModule} from '@angular/forms';
-import { from } from 'rxjs';
 import { ProductService } from './service/product.service';
 import { ShoppingCartService } from './service/shopping-cart.service';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// Build on top of web animations api
 
 const routes: Routes = [
   {
@@ -113,7 +113,8 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule.forRoot(),
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
 
   ],
   providers: [

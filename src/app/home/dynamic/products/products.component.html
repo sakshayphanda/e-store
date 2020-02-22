@@ -9,7 +9,7 @@
 </div>
 
 <div class="categories-menu">
-  <button *ngIf="categories.length"
+  <button *ngIf="productDetails['categories'].length > 1"
     (click)="currentCategory = 'All';openCategory('All');"
     class="btn"
     [class.btn-primary]="currentCategory==='All'"
@@ -18,7 +18,7 @@
   </button>
   <button class="btn"
     (click)="openCategory(category.name);currentCategory = category.name"
-    *ngFor="let category of categories"
+    *ngFor="let category of productDetails['categories']"
     [class.btn-primary]="category.name === currentCategory"
     [class.btn-outline-secondary]="category.name !== currentCategory"
     routerLink="/"

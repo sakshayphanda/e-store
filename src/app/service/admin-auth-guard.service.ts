@@ -14,10 +14,7 @@ export class AdminAuthGuardService implements CanActivate {
   constructor(private authService: AuthServiceService) { }
 
 
-  canActivate(): Observable<boolean> {
-    return this.authService.appUser
-    .map(
-        appUser => appUser.isAdmin // returning the observable of boolean (isAdmin state) of the logged in user.
-    );
+  canActivate() {
+    return this.authService.userData['role'] === 'admin' ? true : false;
   }
 }
