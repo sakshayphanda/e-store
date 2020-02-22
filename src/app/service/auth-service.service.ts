@@ -12,17 +12,17 @@ export class AuthServiceService {
 
   constructor(
     private userService: UserService,
-    private afAuth: AngularFireAuth, private route: ActivatedRoute) { }
+    private angularFireAuth: AngularFireAuth, private route: ActivatedRoute) { }
 
-  userData: Observable<firebase.User> = this.afAuth.authState;
+  userData: Observable<firebase.User> = this.angularFireAuth.authState;
   login() {
     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
     localStorage.setItem('returnUrl', returnUrl);
-    this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    this.angularFireAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
 
   logOut() {
-    this.afAuth.auth.signOut();
+    this.angularFireAuth.auth.signOut();
     localStorage.removeItem('cartId');
     localStorage.removeItem('returnUrl');
   }

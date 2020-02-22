@@ -11,14 +11,14 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthServiceService) { }
+  constructor(private authService: AuthServiceService) { }
 
   ngOnInit() {
 
   }
 
   login() {
-    this.auth.login();
+    this.authService.login();
   }
 
 }

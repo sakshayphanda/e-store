@@ -4,7 +4,7 @@ import { GlobalDataService } from './service/global-data.service';
 import { AuthServiceService } from './service/auth-service.service';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
