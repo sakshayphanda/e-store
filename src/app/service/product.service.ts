@@ -30,7 +30,6 @@ export class ProductService {
     this.getCategories();
     this.db.list('/products').snapshotChanges().subscribe(
       products => { // used snapshotChanges instead of ValueCHanges just to get the key of the object
-        console.log(products);
         this.productDetails['products'] = [];
         this.productDetails['unFilteredProducts'] = [];
         products.forEach(

@@ -2,13 +2,14 @@ import { trigger, transition, style, animate, state } from '@angular/animations'
 
 export const fade = trigger('fade', [
   state('void', style({
+    opacity: 1
   })),
-  transition('void <=> *', [ // :enter, :leave
+  transition('void <=> *', [ // :enter, :leave or void => *, * => void
     style({
-      backgroundColor: 'red', opacity: 0
+      opacity: 0
     }),
     animate(2000, style({
-      backgroundColor: 'blue', opacity: 1
+      opacity: 1
     }))
   ])
 ]);

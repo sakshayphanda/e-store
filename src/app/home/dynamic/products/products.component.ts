@@ -13,7 +13,7 @@ import { ShoppingCartService } from 'src/app/service/shopping-cart.service';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
 
-  user$;
+  userDetails = {};
   adminState;
   products$;
   productKeyValue;
@@ -28,14 +28,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private authService: AuthServiceService,
     private adminService: AdminAuthGuardService,
     private productService: ProductService,
-    private categoryService: CategoryService,
     private cartService: ShoppingCartService,
     private router: Router
     ) { }
 
   ngOnInit() {
     localStorage.setItem('returnUrl', '/products');
-    this.user$ = this.authService.user;
+    this.userDetails = this.authService.userData;
 
     this.productDetails = this.productService.productDetails;
     this.filteredProducts = this.productDetails['unFilteredProducts'];

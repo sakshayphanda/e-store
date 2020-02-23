@@ -1,7 +1,7 @@
 import { AuthServiceService } from './../service/auth-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import * as firebase from 'firebase';
+import { Component, OnInit } from '@angular/core';
+import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/internal/Observable';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { GlobalDataService } from '../service/global-data.service';

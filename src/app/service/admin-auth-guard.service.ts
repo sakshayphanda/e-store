@@ -1,9 +1,7 @@
 import { CanActivate } from '@angular/router';
 import { AuthServiceService } from './auth-service.service';
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { UserService } from './user.service';
 import 'rxjs/add/operator/switchMap';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

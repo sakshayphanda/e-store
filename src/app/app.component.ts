@@ -1,4 +1,3 @@
-import { ShoppingCartService } from 'src/app/service/shopping-cart.service';
 import { AuthServiceService } from './service/auth-service.service';
 import { Component, OnDestroy } from '@angular/core';
 import { fade } from './animations/fade';
