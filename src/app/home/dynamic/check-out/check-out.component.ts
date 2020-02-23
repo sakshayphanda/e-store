@@ -12,6 +12,7 @@ export class CheckOutComponent implements OnInit {
 
   items;
   cartItems = {};
+  message = '';
   constructor(
     private cartService: ShoppingCartService,
     private router: Router,
@@ -24,7 +25,11 @@ export class CheckOutComponent implements OnInit {
   }
 
   addOrderToDb(formValue) {
-    this.orderService.createOrder(localStorage.getItem('cartId'), formValue, this.items);
+    this.orderService.createOrder(formValue, this.cartItems).then(
+      () => {
+        this.message = 'Successfully ordered';
+      }
+    );
   }
 
 }

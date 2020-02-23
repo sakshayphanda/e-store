@@ -8,7 +8,9 @@ export class OrderService {
 
   constructor(private db: AngularFireDatabase) { }
 
-  createOrder(userId, userDetails,userItems) {
-    this.db.list('/orders/' + userId).push({userDetails, userItems});
+  createOrder(userDetails, userItems) {
+      const userId = localStorage.getItem('userId');
+      const promise = this.db.list('/orders/' + userId).push({userDetails, userItems});
+      return promise;
   }
 }
