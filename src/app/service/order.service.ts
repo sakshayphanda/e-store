@@ -5,12 +5,23 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OrderService {
+  userId = localStorage.getItem('userId');
 
   constructor(private db: AngularFireDatabase) { }
 
   createOrder(userDetails, userItems) {
-      const userId = localStorage.getItem('userId');
-      const promise = this.db.list('/orders/' + userId).push({userDetails, userItems});
+      const promise = this.db.list('/orders/' + this.userId).push({userDetails, userItems});
       return promise;
+  }
+
+  readOrdersList() {
+    const promise = new Promise((resolve, reject) => {
+    this.db.list('/orders/' + this.userId).valueChanges().subscribe(
+      response => {
+        resolve(response);
+      }
+    );
+  });
+    return promise;
   }
 }
