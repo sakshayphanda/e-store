@@ -12,6 +12,8 @@ export class SideNavigationComponent implements OnInit {
 
   productsInCart = {};
   userData = {};
+  selectedAction = 'Home';
+  actions = [];
 
   constructor(
     private cartService: ShoppingCartService,
@@ -22,6 +24,42 @@ export class SideNavigationComponent implements OnInit {
   ngOnInit() {
     this.productsInCart = this.cartService.productsInCart;
     this.userData = this.authService.userData;
+    this.initialiseActions();
+  }
+
+  initialiseActions() {
+    this.actions = [
+      {
+        name: 'Home',
+        route: '/',
+        auth: 'no'
+      }, {
+        name: 'Cart',
+        route: '/cart',
+        auth: 'no'
+      }, {
+        name: 'Checkout',
+        route: '/check-out',
+        auth: 'no'
+      }, {
+        name: 'My Orders',
+        route: '/my-orders',
+        auth: 'no'
+      }, {
+        name: 'Admin Orders',
+        route: '/admin/admin-orders',
+        auth: 'admin'
+      }, {
+        name: 'Admin Products',
+        route: '/admin/admin-products',
+        auth: 'admin'
+      }
+    ];
+  }
+
+  actionChanged($event, name) {
+    $event.stopPropagation();
+    this.selectedAction = name;
   }
 
   logOut() {

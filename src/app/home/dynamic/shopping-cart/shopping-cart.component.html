@@ -18,7 +18,7 @@ Total cost: {{productsInCart['totalCost']}}</p>
           <td> {{product['value'].price | currency:"INR":true}}</td>
 
           <td>
-              <button class="btn btn-danger" (click) ="removeItem(product['key'])">remove</button>
+              <button class="btn btn-warning" (click) ="removeItem(product['key'])">remove</button>
             </td>
         </tr>
       </table>

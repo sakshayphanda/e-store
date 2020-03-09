@@ -1,27 +1,18 @@
 <div class="top-nav-bar">
 
-  <button id="menu" *ngIf="showMenuButton" (click) = "toggleSideMenu()" class="btn btn-outline-light">
+  <button id="menu" *ngIf="showMenuButton" (click)="toggleSideMenu()" class="btn btn-outline-light">
     Menu
   </button>
-  <p class="title">E-Shop</p>
+  <p class="logo">SuperMart</p>
 
+  <div class="actions">
+    <span class="cost">Total Cost - {{productsInCart['totalCost']}}</span>
 
-  <p class="cost">Total Cost : {{productsInCart['totalCost']}}</p>
-  <ng-template #anonymousUser>
-    <button class="login-button btn btn-outline-light" routerLink="/login">
-      Login
-    </button>
-  </ng-template>
-  <ng-container ngbDropdown class="dropdown" *ngIf="userData['isLoggedIn']; else anonymousUser">
-    <button *ngIf = "userData['role'] === 'admin'" ngbDropdownToggle class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    </button>
-    <div *ngIf = "userData['role'] === 'admin'" ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 100%">
-
-      <ng-container>
-      <a class="dropdown-item" routerLink="/admin/admin-orders">Admin Orders</a>
-      <a class="dropdown-item" routerLink="/admin/admin-products">Admin Products</a>
+    <ng-template #anonymousUser>
+      <button class="login-button btn" routerLink="/login">Login</button>
+    </ng-template>
+    <ng-container *ngIf="userData['isLoggedIn']; else anonymousUser">
+      <div class="login-button"> </div>
     </ng-container>
-    </div>
-  </ng-container>
+  </div>
 </div>

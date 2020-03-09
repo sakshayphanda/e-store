@@ -18,6 +18,8 @@ export class AppComponent implements OnDestroy {
     this.userData = this.authService.userData;
     this.authService.authenticateUser();
     this.productService.getProducts();
+
+    console.log(this.userData);
   }
 
   ngOnDestroy() {

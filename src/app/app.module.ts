@@ -112,7 +112,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgbModule.forRoot(),
+    NgbModule,
     FormsModule,
     BrowserAnimationsModule
 

@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "~bootstrap/dist/css/bootstrap.css"
 $font-family: 'Open Sans','Source Sans Pro', 'Poppins', Helvetica, Tahoma
 
 *
@@ -21,8 +20,42 @@ $font-family: 'Open Sans','Source Sans Pro', 'Poppins', Helvetica, Tahoma
     width: 4px
     border-radius: 20px
     background-color: transparentize(grey, 0.6)
+
+\:root
+  --primary: rgb(98, 136, 255)
+  --accent: rgb(136, 136, 136)
+  --warning: rgb(204, 0, 0)
+  --primaryLighter: rgb(128, 152, 226)
+  --textColorHover: rgb(255, 255, 255)
+
 html
   font-size: 15px
+
+.btn
+  padding: 4px 6px
+  font-size: 0.8rem
+  height: 2.4rem
+  min-width: 60px
+  margin: 1px 5px 0px 5px
+  outline: none
+  border-radius: 2px
+  border: 0
+
+  &:hover
+    background: var(--primaryLighter)
+    color: var(--textColorHover)
+.btn.btn-primary
+  box-shadow: 2px 2px 4px 2px #e2e2e2
+
+.btn.selected
+  background: var(--primary)
+  color: white
+
+.btn.btn-warning
+  &:hover
+    background: var(--warning)
+
+
 @media screen and (min-width: 320px)
   html
     font-size: calc(10px + 4 * ((100vw - 320px) / 680))
@@ -31,16 +64,7 @@ html
   html
     font-size: 22px
 
-.btn:focus.btn:actived
-   outline: none !important
-   box-shadow: none
 
-.add-to-cart-btn
-  display: flex
-  justify-content: center
-  align-items: center
-  button
-    width: 80%
 
 .card
   height: 350px

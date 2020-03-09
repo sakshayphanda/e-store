@@ -1,45 +1,35 @@
 <div class="welcome-msg">
- <p *ngIf="userDetails['isLoggedIn']; else anonymousUser">
-  <strong> Welcome, {{userDetails['userDetails']?.displayName}} <span style="color: rgb(24, 133, 133)" *ngIf="userDetails['role'] === 'admin'">Admin</span> </strong>
-</p>
+  <p *ngIf="userDetails['isLoggedIn']; else anonymousUser">
+    <strong> Welcome, {{userDetails['userDetails']?.displayName}} <span style="color: rgb(24, 133, 133)"
+        *ngIf="userDetails['role'] === 'admin'">Admin</span> </strong>
+  </p>
 
-<ng-template #anonymousUser>
-  <strong>Welcome, Guest</strong>
-</ng-template>
+  <ng-template #anonymousUser>
+    <strong>Welcome, Guest</strong>
+  </ng-template>
 </div>
 
 <div class="categories-menu">
-  <button *ngIf="productDetails['categories'].length > 1"
-    (click)="currentCategory = 'All';openCategory('All');"
-    class="btn"
-    [class.btn-primary]="currentCategory==='All'"
-    [class.btn-outline-secondary]="currentCategory!=='All'"
-    >All
+  <button *ngIf="productDetails['categories'].length > 1" (click)="currentCategory = 'All';openCategory('All');"
+    class="btn" [class.btn-primary]="currentCategory==='All'">All
   </button>
-  <button class="btn"
-    (click)="openCategory(category.name);currentCategory = category.name"
-    *ngFor="let category of productDetails['categories']"
-    [class.btn-primary]="category.name === currentCategory"
-    [class.btn-outline-secondary]="category.name !== currentCategory"
-    routerLink="/"
+  <button class="btn" (click)="openCategory(category.name);currentCategory = category.name"
+    *ngFor="let category of productDetails['categories']" [class.btn-primary]="category.name === currentCategory"
+    [class.btn-outline-secondary]="category.name !== currentCategory" routerLink="/"
     [queryParams]="{category: category.name}">{{category.name}}</button>
 </div>
 
-<div class="row products-container" style="display: flex; flex-wrap: wrap; justify-content: center">
+<div class="row products-container">
 
-  <ng-container *ngFor="let p of filteredProducts">
-    <div class="column">
-      <div class="card" style="width: 20rem; margin: 5px">
-        <img class="card-img-top" style="height: 65%;" [src]="p.imageUrl">
-
-        <div class="card-body">
-
-          <div class="flex">
-            <p class="product-title">{{p.title}}</p>
-            <strong >{{p.price | currency:"INR":true}}</strong>
-          </div>
-          <div  class="add-to-cart-btn"><button (click)="addToCart(p)" class="btn btn-primary">Add to cart</button></div>
-        </div>
+  <ng-container *ngFor="let product of filteredProducts">
+    <div class="card">
+      <img class="card-image" style="height: 65%;" [src]="product.imageUrl">
+      <div class="product-details">
+        <p class="product-title">{{product.title}}</p>
+        <strong>{{product.price | currency:"INR":true}}</strong>
+      </div>
+      <div class="add-to-cart-btn">
+        <button (click)="addToCart(product)" class="btn btn-primary">Add to cart</button>
       </div>
     </div>
   </ng-container>

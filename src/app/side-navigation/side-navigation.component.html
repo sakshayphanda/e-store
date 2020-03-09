@@ -1,19 +1,17 @@
 <div class="container">
   <div class="image-container" *ngIf="userData['isLoggedIn']">
     <img [src]="userData['userDetails']['photoURL']">
-    <p class="email">{{userData['userDetails']['email']}}</p>
+    <p class="email">{{userData['userDetails']['displayName']}}</p>
   </div>
-  <button (click) ="$event.stopPropagation()" class="btn btn btn-outline-primary" routerLink="/">Home</button>
 
-  <button (click) ="$event.stopPropagation()" class="btn btn btn-outline-primary" routerLink="/cart">Shopping Cart ({{productsInCart['length']}})</button>
+  <div class="image-container" *ngIf="!userData['isLoggedIn']">
+    <img src="https://cdn1.iconfinder.com/data/icons/big-rocket/80/BigRocket-1-01-512.png">
+    <p class="email">Guest User</p>
+  </div>
 
-  <button (click) ="$event.stopPropagation()" class="btn btn-outline-primary" routerLink = "/check-out">checkout</button>
+  <ng-container *ngFor="let action of actions">
+    <button *ngIf="action.auth === 'no' || userData['role'] === action.auth" (click) ="actionChanged($event, action.name)" class="btn btn-primary" [class.selected] = "action.name === selectedAction" [routerLink]="action.route">{{action.name !== 'Cart' ? action.name : action.name + ' (' + productsInCart['length'] + ')'}}</button>
+  </ng-container>
 
-  <button (click) ="$event.stopPropagation()"class="btn btn btn-outline-primary" routerLink="/my-orders">My Orders</button>
-
-  <button (click) ="$event.stopPropagation()" class="btn btn btn-outline-primary" routerLink="/products">Products</button>
-
-  <button *ngIf="userData['isLoggedIn']" (click) ="$event.stopPropagation(); logOut()" class="btn btn btn-outline-primary"  >Logout</button>
-
-
+  <button *ngIf="userData['isLoggedIn']" (click) ="logOut()" class="btn btn-primary"  >Logout</button>
 </div>
