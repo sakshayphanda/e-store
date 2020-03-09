@@ -1,12 +1,15 @@
 <p *ngIf="!ordersList.length">
- Your orders will be displayed here
+  Your orders will be displayed here
 </p>
 
-
-<ng-container *ngFor="let order of ordersList; let i = index">
-  <h4 style="margin-top: 20px;">Order {{i + 1}}</h4>
-  <div *ngFor="let item of order['userItems']['productDetails']">
-    <p>{{item['value']['title'] }}: <span>{{item['value']['price'] }}</span></p>
-  </div>
-  <div><strong>Total Cost: </strong>{{order['userItems']['totalCost']}}</div>
-</ng-container>
+<div class="order-container">
+  <ng-container *ngFor="let order of ordersList; let i = index">
+    <div class="order">
+      <h4 style="margin-top: 20px;">Order {{i + 1}}</h4>
+      <div *ngFor="let item of order['userItems']['productDetails']">
+        <p>{{item['value']['title'] }}: <span>{{item['value']['price'] }}</span></p>
+      </div>
+      <div><strong>Total Cost: </strong>{{order['userItems']['totalCost']}}</div>
+    </div>
+  </ng-container>
+</div>

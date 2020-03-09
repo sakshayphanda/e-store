@@ -1,24 +1,18 @@
-<p>
-Total cost: {{productsInCart['totalCost']}}</p>
-
-
-<p>Products</p>
-
+<p class="cost">Total cost: {{productsInCart['totalCost']}}</p>
 
 <div class="table-container">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tr *ngFor = "let product of productsInCart['productDetails']">
-          <td> {{product['value'].title}}</td>
-          <td> {{product['value'].price | currency:"INR":true}}</td>
+  <table class="table">
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let product of productsInCart['productDetails']">
+      <td> {{product['value'].title}}</td>
+      <td> {{product['value'].price | currency:"INR":true}}</td>
 
-          <td>
-              <button class="btn btn-warning" (click) ="removeItem(product['key'])">remove</button>
-            </td>
-        </tr>
-      </table>
+      <td>
+        <button class="btn btn-warning" (click)="removeItem(product['key'])">remove</button>
+      </td>
+    </tr>
+  </table>
