@@ -52,6 +52,7 @@ export class AuthServiceService {
           this.userData['loading'] = false;
           // this.router.navigateByUrl(localStorage.getItem('returnUrl'));
         } else {
+          this.cartService.getCartProducts();
           this.userData['isLoggedIn'] = false;
           this.userData['loading'] = false;
 
