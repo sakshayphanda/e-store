@@ -1,2 +1,10 @@
+<ng-container *ngFor="let id of toShow; let i = index">
+  <sp-notification [index]="i"
+  [data]="notificationsObj[id]"
+  (actionPerformed)="btnClicked(id, $event)"
+  (onClose)="closed(id, i)">
+  </sp-notification>
+</ng-container>
+
 <app-home @fade></app-home>
 <div *ngIf="userData['loading']" class="loading">Loading&#8230;</div>

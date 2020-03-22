@@ -31,7 +31,7 @@ import { FormsModule} from '@angular/forms';
 import { ProductService } from './service/product.service';
 import { ShoppingCartService } from './service/shopping-cart.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// Build on top of web animations api
+import { NotificationModule } from 'sp-notifications';
 
 const routes: Routes = [
   {
@@ -114,8 +114,8 @@ const routes: Routes = [
     AngularFireAuthModule,
     NgbModule,
     FormsModule,
-    BrowserAnimationsModule
-
+    BrowserAnimationsModule,
+    NotificationModule
   ],
   providers: [
     AuthServiceService,
