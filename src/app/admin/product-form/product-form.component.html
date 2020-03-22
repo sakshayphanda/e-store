@@ -1,84 +1,85 @@
-<div class="row" *ngIf="!productDetails">
-<div class="col-md-6">
-<form #formData="ngForm" (ngSubmit) ="save(formData.value)">
-  <div class="form-group">
-      <label for="title">Title</label>
-    <input #title="ngModel" ngModel name="title" type="text" class="form-control" id="title" placeholder="Enter title">
-  </div>
-  <div class="form-group">
-      <label for="imageUrl">Image URl</label>
-      <input #imageUrl="ngModel" ngModel name="imageUrl" type="text" class="form-control" id="imageUrl" placeholder="Enter url">
-    </div>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="price">₹</span>
-    </div>
-    <input #price ="ngModel" ngModel name="price" type="number" class="form-control" placeholder="Price">
-  </div>
-  <div class="form-group">
-    <label for="category">Category</label>
-    <select #category="ngModel" ngModel name ="category"class="form-control" id="category">
-      <option>Select</option>
-      <option *ngFor = "let category of categoryList"> {{category.name}}</option>
-    </select>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
-
-<div class="col-md-6">
-
-<div class="card" style="width: 18rem;display: flex;justify-content: center">
-    <img class="card-img-top" [src]="imageUrl.value">
-    <div class="card-body">
-      <h5 class="card-title">{{title.value}}</h5>
-      <p class="card-text">{{price.value}}</p>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="row" *ngIf="productDetails">
-    <div class="col-md-6">
-    <form #formData="ngForm" (ngSubmit) ="update(formData.value)">
-      <div class="form-group">
+<div class="product" *ngIf="!productDetails">
+  <div class="product__detail">
+    <form #formData="ngForm" (ngSubmit)="save(formData.value)">
+      <div class="field">
         <label for="title">Title</label>
-        <input #title="ngModel" [(ngModel)]="productDetails.title" name="title" type="text" class="form-control" id="title" placeholder="Enter title">
+        <input #title="ngModel" ngModel name="title" type="text" class="input form-control" id="title"
+          placeholder="Enter title">
+      </div>
+      <div class="field">
+        <label for="imageUrl">Image URl</label>
+        <input #imageUrl="ngModel" ngModel name="imageUrl" type="text" class="input form-control" id="imageUrl"
+          placeholder="Enter url">
+      </div>
+      <div class="field">
+        <label for="price">Price (₹)</label>
+        <input #price="ngModel" ngModel name="price" type="number" class="input form-control" placeholder="Price">
+      </div>
+      <div class="field">
+        <label for="category">Category</label>
+        <select #category="ngModel" ngModel name="category" class="input form-control" id="category">
+          <option>Select</option>
+          <option *ngFor="let category of categoryList"> {{category.name}}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <div class="product__image">
+
+    <div class="card">
+      <img [src]="imageUrl.value">
+      <div class="card__detail">
+        <h4>{{title.value}}</h4>
+        <p>₹{{price.value}}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="product" *ngIf="productDetails">
+  <div class="product__detail">
+    <form #formData="ngForm" (ngSubmit)="update(formData.value)">
+      <div class="field">
+        <label for="title">Title</label>
+        <input #title="ngModel" [(ngModel)]="productDetails.title" name="title" type="text" class="input form-control"
+          id="title" placeholder="Enter title">
       </div>
 
-      <div class="form-group">
-          <label for="imageUrl">Image URl</label>
-          <input #imageUrl="ngModel" [(ngModel)]="productDetails.imageUrl" name="imageUrl" type="text" class="form-control" id="imageUrl" placeholder="Enter url">
-        </div>
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="price">₹</span>
-        </div>
-        <input #price ="ngModel" [(ngModel)]="productDetails.price" name="price" type="number" class="form-control" placeholder="Price">
+      <div class="field">
+        <label for="imageUrl">Image URl</label>
+        <input #imageUrl="ngModel" [(ngModel)]="productDetails.imageUrl" name="imageUrl" type="text"
+          class="input form-control" id="imageUrl" placeholder="Enter url">
       </div>
-      <div class="form-group">
+      <div class="field">
+        <label for="price">Price (₹)</label>
+        <input #price="ngModel" [(ngModel)]="productDetails.price" name="price" type="number" class="input form-control"
+          placeholder="Price">
+      </div>
+      <div class="field">
         <label for="category">Category</label>
-        <select #category="ngModel" [(ngModel)]="productDetails.category" name ="category"class="form-control" id="category">
+        <select #category="ngModel" [(ngModel)]="productDetails.category" name="category" class="input form-control"
+          id="category">
           <option>Select</option>
-          <option *ngFor = "let category of categoryList"> {{category.name}}</option>
+          <option *ngFor="let category of categoryList"> {{category.name}}</option>
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
 
     </form>
-    </div>
+  </div>
 
-    <div class="col-md-6">
+  <div class="product__image">
 
-    <div class="card" style="width: 18rem;display: flex;justify-content: center">
-        <img class="card-img-top" [src]="productDetails.imageUrl">
-        <div class="card-body">
-          <h5 class="card-title">{{productDetails.title}}</h5>
-          <p class="card-text">{{productDetails.price}}</p>
-        </div>
+    <div class="card">
+      <img [src]="productDetails.imageUrl">
+      <div class="card__detail">
+        <h4 >{{productDetails.title}}</h4>
+        <p>₹{{productDetails.price}}</p>
       </div>
     </div>
+  </div>
 
-    </div>
-
+</div>

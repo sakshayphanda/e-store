@@ -1,14 +1,15 @@
-<p class="cost">Total cost: {{productsInCart['totalCost']}}</p>
+<div class="cart-container">
+<!-- <p class="cost">Total cost: {{productsInCart['totalCost']}}</p> -->
 
 <div class="table-container">
   <table class="table">
     <tr>
-      <th>Title</th>
+      <th style="justify-content: flex-start;">Title</th>
       <th>Price</th>
-      <th></th>
+      <th>Actions</th>
     </tr>
     <tr *ngFor="let product of productsInCart['productDetails']">
-      <td> {{product['value'].title}}</td>
+      <td style="justify-content: flex-start;"> {{product['value'].title}}</td>
       <td> {{product['value'].price | currency:"INR":true}}</td>
 
       <td>
@@ -16,3 +17,5 @@
       </td>
     </tr>
   </table>
+
+</div>

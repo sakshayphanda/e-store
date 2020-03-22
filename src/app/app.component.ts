@@ -11,7 +11,7 @@ import { ProductService } from './service/product.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   userData = {};
-  toShow = ['online', 'offline'];
+  toShow = [];
   notificationsObj = {
     offline: {
       icon: 'fas fa-exclamation-circle',

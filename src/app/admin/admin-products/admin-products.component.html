@@ -1,28 +1,31 @@
-<button routerLink="/admin/products/new" class="btn btn-primary">New Products</button>
+<div class="cart-container">
+
+  <button routerLink="/admin/products/new" class="btn btn-primary">New Products</button>
 
 
-<div class="table-container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Categories</th>
-        <th>Title</th>
-        <th>Price</th>
-        <th>Edit</th>
-        <th>Remove</th>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Categories</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Edit</th>
+          <th>Remove</th>
 
-      </tr>
-    </thead>
-    <tr *ngFor = "let product of productDetails['products'] | keyvalue">
-      <td>{{product.value.category}}</td>
-      <td>{{product.value.title}}</td>
-      <td>{{product.value.price}}</td>
-      <td>
-        <a [routerLink] = "['/admin/products/',product.key]">edit</a>
-      </td>
-      <td>
+        </tr>
+      </thead>
+      <tr *ngFor="let product of productDetails['products'] | keyvalue">
+        <td>{{product.value.category}}</td>
+        <td>{{product.value.title}}</td>
+        <td>{{product.value.price}}</td>
+        <td>
+          <a [routerLink]="['/admin/products/',product.key]">edit</a>
+        </td>
+        <td>
           <button class="btn btn-danger" (click)="delete(product.key)">remove</button>
         </td>
-    </tr>
-  </table>
+      </tr>
+    </table>
+  </div>
 </div>

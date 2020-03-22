@@ -7,17 +7,20 @@
   margin-top: 10px
   display: flex
   align-items: center
+  text-indent: 10px
 
 .categories-menu
-  height: 4rem
+  height: 5rem
   display: flex
   justify-content: center
+  align-items: center
   position: sticky
   z-index: 10000
   background: white
   top: -5px
   padding: 10px
-  box-shadow: 0px 5px 8px -1px #d6d6d6
+  border: 1px solid #d6d1d1
+  border-radius: 5px
   .btn
     margin: 2px
 
@@ -27,7 +30,7 @@
   flex-wrap: wrap
   justify-content: center
   .card
-    margin: 10px
+    margin: 15px
 
 .product-title
   font-weight: 500
@@ -35,7 +38,7 @@
 
 
 .card
-  border: 1px solid #cecece
+  box-shadow: 0px 3px 6px 1px #e6e1e1
   border-radius: 3px
   padding: 5px
   width: 350px
@@ -52,6 +55,9 @@
     .btn
       min-width: 100px
       margin: 10px
+      color: grey
+      &:hover
+        color: white
   .product-details
     display: flex
     justify-content: center

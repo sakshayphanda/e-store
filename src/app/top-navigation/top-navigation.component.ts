@@ -40,7 +40,7 @@ export class TopNavigationComponent implements OnInit {
   }
 
   mobileResponsiveness() {
-    if (window.innerWidth < 600) {
+    if (window.innerWidth < 900) {
       this.showMenuButton = true;
     } else {
       this.showMenuButton = false;

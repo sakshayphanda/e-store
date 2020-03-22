@@ -1,13 +1,15 @@
 <div class="top-nav-bar">
 
   <button id="menu" *ngIf="showMenuButton" (click)="toggleSideMenu()" class="btn btn-inherit">
-    Menu
+    <i class="fas fa-bars"></i>
   </button>
-  <p class="logo">SuperMart</p>
+  <p class="logo"><i class="fas fa-shopping-cart"> </i> SuperMart</p>
 
   <div class="actions">
-    <span class="cost">Total Cost - {{productsInCart['totalCost']}}</span>
+    <span class="cost"><p class="cost-value">Total ₹{{productsInCart['totalCost']}}</p></span>
 
+
+    <button class="btn btn-inherit cart-btn" routerLink="/cart"> <i class="fas fa-cart-arrow-down"></i> {{'Cart (' + productsInCart['length'] + ')'}}</button>
     <ng-template #anonymousUser>
       <button class="login-button btn" routerLink="/login">Login</button>
     </ng-template>

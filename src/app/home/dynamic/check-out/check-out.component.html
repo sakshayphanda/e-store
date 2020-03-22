@@ -1,5 +1,6 @@
-<div class="container">
-  <div>
+<div class="checkout">
+  <div class="checkout__content">
+    <div class="title">Checkout</div>
     <form #formValue="ngForm" (ngSubmit)="addOrderToDb(formValue.value)">
       <div class="form-group">
         <input #address="ngModel" ngModel name="address" class="form-control" type="text" placeholder="Address"
@@ -9,12 +10,11 @@
         <input #pin="ngModel" ngModel name="pin" class="form-control" type="number" placeholder="pin code">
       </div>
 
-      <button type="submit" class="btn btn-warning">
+      <button type="submit" class="btn selected">
         Pay {{cartItems['totalCost'] | currency:"INR":true}}
       </button>
     </form>
   </div>
-  <div></div>
 </div>
 
 
