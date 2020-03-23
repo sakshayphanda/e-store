@@ -15,6 +15,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.mobileResponsiveness();
+    this.globalData.toggleMenu.subscribe(
+      response => {
+        if (response === 'show') {
+          this.showMenu = true;
+        } else {
+          this.showMenu = !this.showMenu;
+        }
+      }
+    );
   }
 
   mobileResponsiveness() {
@@ -29,14 +38,5 @@ export class HomeComponent implements OnInit {
         }
       }
     });
-    this.globalData.toggleMenu.subscribe(
-      response => {
-        if (response === 'show') {
-          this.showMenu = true;
-        } else {
-          this.showMenu = !this.showMenu;
-        }
-      }
-    );
   }
 }
