@@ -2,6 +2,7 @@ import { AuthServiceService } from './service/auth-service.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fade } from './animations/fade';
 import { ProductService } from './service/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -44,7 +45,8 @@ export class AppComponent implements OnInit, OnDestroy {
   };
   constructor(
     private authService: AuthServiceService,
-    private productService: ProductService) {
+    private productService: ProductService
+    ) {
 
     this.userData = this.authService.userData;
     this.authService.authenticateUser();
@@ -56,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   btnClicked(id, $event) {
-    if($event === 'reload') {
+    if ($event === 'reload') {
       window.location.reload();
     }
   }
@@ -65,9 +67,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if (navigator.onLine) {
       const conn = window.navigator['connection'];
       if (conn) {
-        // save data mode is enabled, so dont preload
-        // if (conn.saveData) {
-        // }
         this.slowConnectionCheck(conn);
       }
     } else {
@@ -94,9 +93,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
       const conn = window.navigator['connection'];
       if (conn) {
-        // save data mode is enabled, so dont preload
-        // if (conn.saveData) {
-        // }
         this.slowConnectionCheck(conn);
       }
     });

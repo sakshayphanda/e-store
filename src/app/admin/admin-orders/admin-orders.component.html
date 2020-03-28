@@ -1,3 +1,26 @@
-<p>
-  admin-orders works!
-</p>
+<div class="customerorder">
+  <p class="customerorder__title">
+    {{!showOrders ? 'Your customer orders will be displayed here' : 'Admin Orders'}}
+  </p>
+
+  <ng-container *ngFor="let customer of customerOrders | keyvalue">
+    <div class="customerorder__id">customerId: {{customer.key}}</div>
+    <div class="customerorder__container">
+      <ng-container *ngFor="let order of customer.value | keyvalue;  let i = index">
+        <div class="order">
+          <p class="title">Order {{i + 1}}</p>
+          <div class="item-container">
+            <div class="item" *ngFor="let item of order.value['userItems']['productDetails']">
+              <p>{{item['value']['title'] }}</p>
+              <p>₹{{item['value']['price'] }}</p>
+            </div>
+          </div>
+          <div class="total-cost">
+            <p>Total Cost</p>
+            <p>₹{{order.value['userItems']['totalCost']}}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

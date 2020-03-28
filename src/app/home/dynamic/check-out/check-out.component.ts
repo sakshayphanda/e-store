@@ -20,7 +20,6 @@ export class CheckOutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    localStorage.setItem('returnUrl', this.router.url);
     this.cartItems = this.cartService.productsInCart;
   }
 

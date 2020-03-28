@@ -39,6 +39,14 @@ const routes: Routes = [
     component: DynamicComponent
   },
   {
+    path: 'home',
+    component: DynamicComponent
+  },
+  {
+    path: 'home',
+    component: DynamicComponent
+  },
+  {
     path: 'login',
     component: LoginComponent
   },
@@ -46,10 +54,6 @@ const routes: Routes = [
     path: 'check-out',
     component: CheckOutComponent,
     canActivate: [AuthGuardService]
-  },
-  {
-    path: 'products',
-    component: ProductsComponent
   },
   {
     path: 'cart',

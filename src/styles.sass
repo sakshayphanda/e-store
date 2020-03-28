@@ -13,13 +13,13 @@ $font-family: 'Open Sans','Source Sans Pro', 'Poppins', Helvetica, Tahoma
   user-select: text
   -webkit-font-smoothing: antialiased
   ::-webkit-scrollbar
-    width: 6px
-    height: 6px
-    background-color: transparentize(grey, 0.9)
+    width: 4px
+    height: 4px
+    // background-color: transparentize(grey, 0.9)
   ::-webkit-scrollbar-thumb
     width: 4px
-    border-radius: 20px
-    background-color: transparentize(grey, 0.6)
+    border-radius: 10px
+    background-color: var(--primaryLighterTransparentize)
 
 body
   overflow: hidden
@@ -28,6 +28,7 @@ body
   --accent: rgb(136, 136, 136)
   --warning: rgb(204, 0, 0)
   --primaryLighter: rgb(128, 152, 226)
+  --primaryLighterTransparentize: rgba(128, 152, 226, 0.8)
   --textColorHover: rgb(255, 255, 255)
 
 html

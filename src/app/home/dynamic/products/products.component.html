@@ -16,7 +16,7 @@
     </button>
     <button class="btn" (click)="openCategory(category.name);currentCategory = category.name"
       *ngFor="let category of productDetails['categories']" [class.selected]="category.name === currentCategory"
-      routerLink="/" [queryParams]="{category: category.name}">{{category.name}}</button>
+      routerLink="/home" [queryParams]="{category: category.name}">{{category.name}}</button>
   </div>
 
   <div class="row products-container">

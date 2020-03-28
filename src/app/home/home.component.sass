@@ -27,13 +27,14 @@
 
 .dynamic
   width: calc(100vw - 220px)
-  height: calc(100vh - 65px)
+  height: calc(100vh - 70px)
   background: white
   overflow: auto
   z-index: 0
   position: absolute
   bottom: 0
   right: 0
+  margin: 2px
 
 
 
@@ -47,5 +48,9 @@
   .dynamic
     width: 100vw
     height: calc(100vh - 90px)
-    padding: 80px 20px !important
 
+
+
+@media screen and (max-width: 500px)
+  .dynamic
+    padding: 80px 20px 10px 20px!important

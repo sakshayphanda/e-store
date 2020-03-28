@@ -24,4 +24,15 @@ export class OrderService {
   });
     return promise;
   }
+
+  readAdminOrders() {
+    const promise = new Promise((resolve, reject) => {
+      this.db.object('/orders').valueChanges().subscribe(
+        response => {
+          resolve(response);
+        }
+      );
+    });
+    return promise;
+  }
 }

@@ -14,9 +14,7 @@ export class ShoppingCartComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    localStorage.setItem('returnUrl', this.router.url);
     this.productsInCart = this.cartService.productsInCart;
-    console.log(this.productsInCart);
   }
   removeItem(productKey) {
     this.cartService.removeItem(productKey);

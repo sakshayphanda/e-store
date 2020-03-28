@@ -1,28 +1,50 @@
-.cart-container
+.customerorder
   padding: 40px 20px
-table
-  width: 100%
-  border: 1px solid #d2cccc
-  border-radius: 5px
-  margin: 10px 0px
-  padding: 10px
-  tr
-    display: flex
-    margin: 5px
+  &__title
+    font-size: 1.5rem
+    color: grey
+  &__id
     padding: 10px
-    td
+    font-size: 1rem
+    color: var(--primary)
+  &__container
+    padding: 10px
+    display: flex
+    flex-wrap: wrap
+    .order
+      border: 1px solid #dbdbdb
+      border-radius: 3px
+      margin: 20px
+      min-width: 320px
       flex: 1
+      padding: 10px
       display: flex
-      align-items: center
-      justify-content: center
-      color: grey
+      flex-direction: column
+      .title
+        font-size: 1.2rem
+        display: flex
+        align-items: center
+        justify-content: center
+        padding: 3px
+      .item-container
+        overflow: auto
+        height: 300px
+        padding: 10px
+        .item
+          display: flex
+          color: grey
+          p
+            flex: 1
+      .total-cost
+        display: flex
+        font-size: 1rem
+        font-weight: 600
+        background: var(--primary)
+        color: white
+        border: 1px solid var(--primary)
+        padding: 10px
+        border-radius: 5px
+        margin: 5px
+        p
+          flex: 1
 
-    th
-      flex: 1
-      display: flex
-      align-items: center
-      justify-content: center
-
-.cost
-  font-weight: 600
-  font-size: 1rem

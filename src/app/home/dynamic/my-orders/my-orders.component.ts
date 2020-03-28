@@ -9,6 +9,7 @@ import { OrderService } from 'src/app/service/order.service';
 export class MyOrdersComponent implements OnInit {
 
   ordersList = [];
+  showOrders = true;
   constructor(
     private orderService: OrderService
   ) { }
@@ -17,6 +18,11 @@ export class MyOrdersComponent implements OnInit {
     this.orderService.readOrdersList().then(
       (response: any []) => {
         this.ordersList = response;
+        if(this.ordersList.length) {
+          this.showOrders = true;
+        } else {
+          this.showOrders = false;
+        }
       }
     );
   }

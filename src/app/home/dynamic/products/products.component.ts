@@ -1,5 +1,5 @@
 import { CategoryService } from './../../../service/category.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AdminAuthGuardService } from './../../../service/admin-auth-guard.service';
 import { AuthServiceService } from './../../../service/auth-service.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -29,16 +29,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private adminService: AdminAuthGuardService,
     private productService: ProductService,
     private cartService: ShoppingCartService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
     ) { }
 
   ngOnInit() {
-    localStorage.setItem('returnUrl', '/products');
     this.userDetails = this.authService.userData;
-
     this.productDetails = this.productService.productDetails;
     this.filteredProducts = this.productDetails['unFilteredProducts'];
-
     this.adminService.adminEmail.subscribe(
       isAdmin => this.adminState = isAdmin
     );
@@ -48,18 +46,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
   loadProducts() {
     this.productService.getProducts().then(
     (response) => {
-      this.openCategory(this.currentCategory);
+      this.openCategory();
     });
   }
 
-  openCategory(cat: string) {
+  openCategory() {
+    const params = this.activatedRoute.snapshot.queryParams;
+    if (Object.keys(params).length) {
+    this.currentCategory = params['category'];
+    } else {
+      this.currentCategory = 'All';
+    }
     this.filteredProducts = this.productDetails['unFilteredProducts'];
-    if (cat === 'All') {
+    if (this.currentCategory === 'All') {
       return;
     } else {
     this.filteredProducts = this.filteredProducts.filter(
       p => {
-        if (cat.toLowerCase() === (p.category).toLowerCase()) {
+        if (this.currentCategory.toLowerCase() === (p.category).toLowerCase()) {
         return true;
       }
     }
@@ -82,7 +86,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     } else {
     this.cartService.addProductsToCart(cartId, product);
     }
-   // this.router.navigate(['/cart'], { queryParams: { id: id }});
   }
 
 

@@ -17,9 +17,6 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    // const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-   // localStorage.setItem();
-   localStorage.setItem('returnUrl', this.router.url);
    this.loadProductsData();
 
   }

@@ -31,7 +31,7 @@ export class SideNavigationComponent implements OnInit {
     this.actions = [
       {
         name: 'Home',
-        route: '/',
+        route: '/home',
         auth: 'no'
       }, {
         name: 'Cart',
