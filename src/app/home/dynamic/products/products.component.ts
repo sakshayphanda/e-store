@@ -46,11 +46,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
   loadProducts() {
     this.productService.getProducts().then(
     (response) => {
-      this.openCategory();
+      this.openCategory(this.currentCategory);
     });
   }
 
-  openCategory() {
+  openCategory(category) {
     const params = this.activatedRoute.snapshot.queryParams;
     if (Object.keys(params).length) {
     this.currentCategory = params['category'];
@@ -58,12 +58,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
       this.currentCategory = 'All';
     }
     this.filteredProducts = this.productDetails['unFilteredProducts'];
-    if (this.currentCategory === 'All') {
+    if (category === 'All') {
+      this.filteredProducts = this.productDetails['unFilteredProducts'];
       return;
     } else {
     this.filteredProducts = this.filteredProducts.filter(
       p => {
-        if (this.currentCategory.toLowerCase() === (p.category).toLowerCase()) {
+        if (category.toLowerCase() === (p.category).toLowerCase()) {
         return true;
       }
     }

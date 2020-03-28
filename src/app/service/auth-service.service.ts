@@ -37,8 +37,8 @@ export class AuthServiceService {
   }
 
   logOut() {
-    this.angularFireAuth.auth.signOut();
     localStorage.clear();
+    this.angularFireAuth.auth.signOut();
   }
 
   authenticateUser() {
@@ -85,7 +85,6 @@ export class AuthServiceService {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const route = event['urlAfterRedirects'];
-        console.log(route);
         if (route !== null && route !== '/login') {
           localStorage.setItem('returnUrl', route);
         }
