@@ -29,10 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
         background: '#71b971'
       },
       message: 'Internet is now connected',
-      buttons: [{
-        id: 'reload',
-        name: 'Reload'
-      }
+      buttons: [
       ]
     },
     slow: {

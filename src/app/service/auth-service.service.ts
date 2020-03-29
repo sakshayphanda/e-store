@@ -43,14 +43,15 @@ export class AuthServiceService {
 
   authenticateUser() {
     this.userData['loading'] = true;
-    const $userData = this.user.subscribe(user => {
+    const $userData = this.user.subscribe(async user => {
       if (user) {
+        this.userData['loading'] = true;
         this.userService.updateUser(user);
         localStorage.setItem('userId', user.uid);
         this.userData['isLoggedIn'] = true;
         this.userData['userid'] = user.uid;
         this.userData['userDetails'] = user.providerData[0];
-        this.userRole(user.uid);
+        await this.userRole(user.uid);
         this.cartService.getCartProducts();
         this.userData['loading'] = false;
         this.redirectToReturnUrl();
@@ -66,13 +67,18 @@ export class AuthServiceService {
   }
 
   userRole(uid) {
+    const promise = new Promise((resolve, reject) => {
     this.angularFireDatabase
       .object('/roles/' + uid)
       .valueChanges()
       .subscribe(userRole => {
         this.userData['role'] = userRole;
         this.redirectToReturnUrl();
+        resolve();
       });
+    });
+
+    return promise;
   }
 
   redirectToReturnUrl() {
