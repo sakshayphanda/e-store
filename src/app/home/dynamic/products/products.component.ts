@@ -52,14 +52,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   openCategory(category) {
     const params = this.activatedRoute.snapshot.queryParams;
-    if (Object.keys(params).length) {
-    this.currentCategory = params['category'];
-    } else {
-      this.currentCategory = 'All';
-    }
     this.filteredProducts = this.productDetails['unFilteredProducts'];
     if (category === 'All') {
-      this.filteredProducts = this.productDetails['unFilteredProducts'];
       return;
     } else {
     this.filteredProducts = this.filteredProducts.filter(

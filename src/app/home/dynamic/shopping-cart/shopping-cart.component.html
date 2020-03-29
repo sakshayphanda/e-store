@@ -1,21 +1,19 @@
 <div class="cart-container">
-<!-- <p class="cost">Total cost: {{productsInCart['totalCost']}}</p> -->
+  <div class="table-container">
+    <table class="table">
+      <tr>
+        <th style="justify-content: flex-start;">Title</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let product of productsInCart['productDetails']">
+        <td style="justify-content: flex-start;"> {{product['value'].title}}</td>
+        <td> {{product['value'].price | currency:"INR":true}}</td>
 
-<div class="table-container">
-  <table class="table">
-    <tr>
-      <th style="justify-content: flex-start;">Title</th>
-      <th>Price</th>
-      <th>Actions</th>
-    </tr>
-    <tr *ngFor="let product of productsInCart['productDetails']">
-      <td style="justify-content: flex-start;"> {{product['value'].title}}</td>
-      <td> {{product['value'].price | currency:"INR":true}}</td>
+        <td>
+          <button class="btn btn-warning" (click)="removeItem(product['key'])">remove</button>
+        </td>
+      </tr>
+    </table>
 
-      <td>
-        <button class="btn btn-warning" (click)="removeItem(product['key'])">remove</button>
-      </td>
-    </tr>
-  </table>
-
-</div>
+  </div>

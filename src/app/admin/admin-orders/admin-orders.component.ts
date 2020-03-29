@@ -17,7 +17,6 @@ export class AdminOrdersComponent implements OnInit {
     this.orderService.readAdminOrders().then(
       (response: Object) => {
         this.customerOrders = response;
-        console.log(this.customerOrders);
         if (Object.keys(response).length) {
           this.showOrders = true;
         } else {

@@ -12,7 +12,8 @@
 
   <div class="categories-menu">
     <button *ngIf="productDetails['categories'].length > 1" (click)="currentCategory = 'All';openCategory('All');"
-      class="btn" [class.selected]="currentCategory==='All'">All
+      class="btn" [class.selected]="currentCategory==='All'"
+      routerLink="/home" [queryParams]="{category: 'All'}">All
     </button>
     <button class="btn" (click)="openCategory(category.name);currentCategory = category.name"
       *ngFor="let category of productDetails['categories']" [class.selected]="category.name === currentCategory"
@@ -30,8 +31,8 @@
         </div>
         <div class="add-to-cart-btn">
           <button (click)="addToCart(product)" class="btn btn-primary"><i class="fas fa-shopping-cart cart-icon"> </i>
-            Add
-            to cart</button>
+            Add to cart
+          </button>
         </div>
       </div>
     </ng-container>
