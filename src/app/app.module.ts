@@ -4,7 +4,7 @@ import { GlobalDataService } from './service/global-data.service';
 import { AuthServiceService } from './service/auth-service.service';
 import { environment } from './../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
@@ -12,7 +12,7 @@ import { TopNavigationComponent } from './top-navigation/top-navigation.componen
 import { LoginComponent } from './login/login.component';
 import { DynamicComponent } from './home/dynamic/dynamic.component';
 import { HomeComponent} from './home/home.component';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireModule, FirebaseOptionsToken } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { ProductsComponent } from './home/dynamic/products/products.component';
@@ -113,13 +113,16 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
     FormsModule,
     BrowserAnimationsModule,
     NotificationModule
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [
     AuthServiceService,
@@ -129,7 +132,8 @@ const routes: Routes = [
     AdminAuthGuardService,
     CategoryService,
     ProductService,
-    ShoppingCartService
+    ShoppingCartService,
+  { provide: FirebaseOptionsToken, useValue: environment.firebase }
   ],
   bootstrap: [AppComponent]
 })
