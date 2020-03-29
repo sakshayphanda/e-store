@@ -2,13 +2,14 @@
   display: flex
   justify-content: space-between
 .products
-  padding: 40px 20px
+  padding: 5px
 .welcome-msg
   height: 3rem
   margin-top: 10px
   display: flex
   align-items: center
   text-indent: 10px
+  color: var(--color-canvasbar-font)
 
 .categories-menu
   height: 5rem
@@ -32,6 +33,7 @@
   justify-content: center
   .card
     margin: 15px
+    background: white
 
 .product-title
   font-weight: 500
@@ -39,30 +41,38 @@
 
 
 .card
-  box-shadow: 0px 3px 6px 1px #e6e1e1
-  border-radius: 3px
-  padding: 5px
+  box-shadow: var(--cardBoxShadow)
+  border-radius: 8px
   width: 350px
+  transition: all .5s ease-in-out
+  display: flex
+  flex-direction: column
+  &:hover
+    transform: rotate(1deg)
   .card-image
     width: 100%
-    transition: all .5s ease-in-out
-    clip-path: circle()
-    &:hover
-      clip-path: unset !important
+    height: 55%
+    flex: 6.5
+    border-radius: 8px 8px 0 0
   .add-to-cart-btn
     display: flex
+    flex: 1.5
     justify-content: center
+    color: var(--title)
     align-items: center
-    .btn
-      min-width: 100px
-      margin: 10px
-      color: grey
-      &:hover
-        color: white
+    cursor: pointer
+    border-top: 1px solid var(--border)
+    &:hover
+      background: var(--primaryDarken)
+      color: white
   .product-details
     display: flex
+    flex: 2
     justify-content: center
     align-items: center
     flex-direction: column
 
 
+@media screen and (max-width: 500px)
+  .categories-menu
+    position: relative

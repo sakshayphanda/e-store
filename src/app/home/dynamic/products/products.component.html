@@ -24,15 +24,13 @@
 
     <ng-container *ngFor="let product of filteredProducts">
       <div class="card">
-        <img class="card-image" style="height: 65%;" [src]="product.imageUrl">
+        <img class="card-image" [src]="product.imageUrl">
         <div class="product-details">
           <p class="product-title">{{product.title}}</p>
           <strong>{{product.price | currency:"INR":true}}</strong>
         </div>
-        <div class="add-to-cart-btn">
-          <button (click)="addToCart(product)" class="btn btn-primary"><i class="fas fa-shopping-cart cart-icon"> </i>
+        <div class="add-to-cart-btn" (click)="addToCart(product)">
             Add to cart
-          </button>
         </div>
       </div>
     </ng-container>

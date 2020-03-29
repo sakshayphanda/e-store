@@ -2,13 +2,14 @@
   padding: 40px 20px
   &__title
     font-size: 1.5rem
-    color: grey
+    color: var(--title)
   &__container
     padding: 10px
     display: flex
     flex-wrap: wrap
     .order
-      border: 1px solid #dbdbdb
+      box-shadow: var(--cardBoxShadow)
+      background: var(--cardBackground)
       border-radius: 3px
       margin: 20px
       min-width: 320px
@@ -22,6 +23,7 @@
         align-items: center
         justify-content: center
         padding: 3px
+        color: var(--title)
       .item-container
         overflow: auto
         height: 300px
