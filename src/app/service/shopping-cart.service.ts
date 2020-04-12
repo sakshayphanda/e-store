@@ -35,7 +35,6 @@ export class ShoppingCartService {
         products.forEach(
           product => {
             totalCost = totalCost + product.payload.val()['price'];
-            console.log(product.payload.val());
             productDetails.push({
               key: product.key,
               value: product.payload.val()
