@@ -3,13 +3,17 @@ import { Injectable } from '@angular/core';
 import { IProductsInCart } from '../model/IProductsInCart';
 import { defaultProductsInCart } from '../data/defaultProductsInCart';
 import { LocalStorageKeys } from '../enums/LocalStorageKeys';
+import { NotificationsService } from './notifications.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
   productsInCart: IProductsInCart = defaultProductsInCart;
-  constructor(private db: AngularFireDatabase) {
+  constructor(
+    private db: AngularFireDatabase,
+    private notificationsService: NotificationsService
+    ) {
    }
 
 
@@ -23,6 +27,11 @@ export class ShoppingCartService {
 
   addProductsToCart(cartid, product) {
     this.db.object('/shopping-cart/' + cartid + '/items/' + product.title + new Date().getTime()).update(product);
+    this.notificationsService.toShow.push('cart');
+    setTimeout(() => {
+      const index = this.notificationsService.toShow.indexOf('cart');
+      this.notificationsService.toShow.splice(index, 1);
+    }, 2000);
   }
 
   getCartProducts() {

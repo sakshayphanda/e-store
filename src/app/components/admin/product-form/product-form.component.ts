@@ -1,9 +1,10 @@
-import { CategoryService } from '../../../service/category.service';
+import { CategoryService, ICategories } from '../../../service/category.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/take';
 import { Routes } from 'src/app/enums/Routes';
+import { IProductDetails } from 'src/app/model/IProductDetails';
 
 @Component({
   selector: 'app-product-form',
@@ -12,8 +13,8 @@ import { Routes } from 'src/app/enums/Routes';
 })
 export class ProductFormComponent implements OnInit , OnDestroy{
   categories;
-  productDetails;
-  categoryList;
+  productDetails: IProductDetails;
+  categoryList: ICategories[];
   id;
 
   constructor(private categoryService: CategoryService,

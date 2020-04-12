@@ -23,5 +23,12 @@ export const notificationsData = {
     },
     message: 'Slow Network detected. You may experience delay in response',
     buttons: []
+  },
+  cart: {
+    style: {
+      background: '#71b971'
+    },
+    message: 'Added to cart',
+    buttons: []
   }
 };
