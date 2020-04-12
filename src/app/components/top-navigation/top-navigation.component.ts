@@ -7,6 +7,7 @@ import { ShoppingCartService } from '../../service/shopping-cart.service';
 import { GlobalDataService } from '../../service/global-data.service';
 import { IUserData } from '../../model/IUserData';
 import { Routes } from '../../enums/Routes';
+import { IProductsInCart } from 'src/app/model/IProductsInCart';
 
 @Component({
   selector: 'app-top-navigation',
@@ -14,13 +15,10 @@ import { Routes } from '../../enums/Routes';
   styleUrls: ['./top-navigation.component.sass']
 })
 export class TopNavigationComponent implements OnInit {
-  user$: Observable<firebase.User>;
-  isAdminAccount = false;
-  products = [];
-  totalCost = 0;
   showMenuButton = false;
-  productsInCart = {};
+  productsInCart: IProductsInCart;
   userData: IUserData;
+  Routes = Routes;
 
   constructor(
     private authService: AuthServiceService,

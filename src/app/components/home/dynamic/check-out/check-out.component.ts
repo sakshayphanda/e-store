@@ -2,6 +2,7 @@ import { OrderService } from '../../../../service/order.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from 'src/app/service/shopping-cart.service';
+import { IProductsInCart } from 'src/app/model/IProductsInCart';
 
 @Component({
   selector: 'app-check-out',
@@ -9,13 +10,10 @@ import { ShoppingCartService } from 'src/app/service/shopping-cart.service';
   styleUrls: ['./check-out.component.sass']
 })
 export class CheckOutComponent implements OnInit {
-
-  items;
-  cartItems = {};
-  message = '';
+  cartItems: IProductsInCart;
+  message: string;
   constructor(
     private cartService: ShoppingCartService,
-    private router: Router,
     private orderService: OrderService
   ) { }
 

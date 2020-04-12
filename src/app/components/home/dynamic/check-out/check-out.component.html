@@ -11,7 +11,7 @@
       </div>
 
       <button type="submit" class="btn selected">
-        Pay {{cartItems['totalCost'] | currency:"INR":true}}
+        Pay {{cartItems.totalCost | currency:"INR":true}}
       </button>
       <div>{{message}}</div>
     </form>

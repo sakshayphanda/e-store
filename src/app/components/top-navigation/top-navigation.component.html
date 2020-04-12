@@ -9,12 +9,12 @@
       </span> SuperMart</p>
 
   <div class="actions">
-    <span class="cost"><p class="cost-value">Total ₹{{productsInCart['totalCost']}}</p></span>
+    <span class="cost"><p class="cost-value">Total ₹{{productsInCart.totalCost}}</p></span>
 
 
-    <button class="btn btn-inherit cart-btn" routerLink="/cart"> <i class="fas fa-cart-arrow-down"></i> {{'Cart (' + productsInCart['length'] + ')'}}</button>
+    <button class="btn btn-inherit cart-btn" [routerLink]="Routes.CART"> <i class="fas fa-cart-arrow-down"></i> {{'Cart (' + productsInCart.length + ')'}}</button>
     <ng-template #anonymousUser>
-      <button class="login-button btn" routerLink="/login">Login</button>
+      <button class="login-button btn" [routerLink]="Routes.LOGIN">Login</button>
     </ng-template>
     <ng-container *ngIf="userData.isLoggedIn; else anonymousUser">
       <div class="login-button"> </div>

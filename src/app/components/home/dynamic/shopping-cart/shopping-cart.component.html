@@ -6,12 +6,12 @@
         <th>Price</th>
         <th>Actions</th>
       </tr>
-      <tr *ngFor="let product of productsInCart['productDetails']">
-        <td style="justify-content: flex-start;"> {{product['value'].title}}</td>
-        <td> {{product['value'].price | currency:"INR":true}}</td>
+      <tr *ngFor="let product of productsInCart.productDetails">
+        <td style="justify-content: flex-start;"> {{product.value.title}}</td>
+        <td> {{product.value.price | currency:"INR":true}}</td>
 
         <td>
-          <button class="btn btn-warning" (click)="removeItem(product['key'])">remove</button>
+          <button class="btn btn-warning" (click)="removeItem(product.key)">remove</button>
         </td>
       </tr>
     </table>
