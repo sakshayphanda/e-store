@@ -9,7 +9,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
-  productDetails = {};
+  productsData = {};
   objectKeys = Object.keys;
 
   constructor(private productService: ProductService,
@@ -22,7 +22,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   }
 
   loadProductsData() {
-    this.productDetails = this.productService.productDetails;
+    this.productsData = this.productService.productsData;
 
   }
   delete(itemKey) {

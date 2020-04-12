@@ -11,12 +11,12 @@
   </div>
 
   <div class="categories-menu">
-    <button *ngIf="productDetails['categories'].length > 1" (click)="currentCategory = 'All';openCategory('All');"
+    <button *ngIf="productsData.categories.length > 1" (click)="currentCategory = 'All';openCategory('All');"
       class="btn" [class.selected]="currentCategory==='All'"
       [routerLink]="Routes.HOME" [queryParams]="{category: 'All'}">All
     </button>
     <button class="btn" (click)="openCategory(category.name);currentCategory = category.name"
-      *ngFor="let category of productDetails['categories']" [class.selected]="category.name === currentCategory"
+      *ngFor="let category of productsData.categories" [class.selected]="category.name === currentCategory"
       [routerLink]="Routes.HOME" [queryParams]="{category: category.name}">{{category.name}}</button>
   </div>
 

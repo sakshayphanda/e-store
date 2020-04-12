@@ -15,7 +15,7 @@
 
         </tr>
       </thead>
-      <tr *ngFor="let product of productDetails['products'] | keyvalue">
+      <tr *ngFor="let product of productsData['products'] | keyvalue">
         <td>{{product.value.category}}</td>
         <td>{{product.value.title}}</td>
         <td>{{product.value.price}}</td>

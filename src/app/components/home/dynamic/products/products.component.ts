@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { AuthServiceService } from '../../../../service/auth-service.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductService } from 'src/app/service/product.service';
+import { ProductService, IProducts } from 'src/app/service/product.service';
 import { ShoppingCartService } from 'src/app/service/shopping-cart.service';
 import { IUserData } from 'src/app/model/IUserData';
 import { Routes } from 'src/app/enums/Routes';
@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   userDetails: IUserData;
   filteredProducts = [];
   currentCategory = 'All';
-  productDetails = {};
+  productsData: IProducts;
   Routes = Routes;
   Roles = Roles;
   constructor(
@@ -30,8 +30,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.userDetails = this.authService.userData;
-    this.productDetails = this.productService.productDetails;
-    this.filteredProducts = this.productDetails['unFilteredProducts'];
+    this.productsData = this.productService.productsData;
+    this.filteredProducts = this.productsData.unFilteredProducts;
     this.loadProducts();
   }
 
@@ -44,7 +44,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   openCategory(category) {
     const params = this.activatedRoute.snapshot.queryParams;
-    this.filteredProducts = this.productDetails['unFilteredProducts'];
+    this.filteredProducts = this.productsData.unFilteredProducts;
     if (category === 'All') {
       return;
     } else {

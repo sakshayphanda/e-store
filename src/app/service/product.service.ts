@@ -1,13 +1,19 @@
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 import { IProductDetails } from '../model/IProductDetails';
+import { ICategories } from './category.service';
 
+export interface IProducts {
+  products: Object;
+  categories: ICategories[];
+  unFilteredProducts: IProductDetails[];
+}
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  productDetails = {
+  productsData: IProducts = {
     products: {},
     categories: [],
     unFilteredProducts: []
@@ -31,12 +37,12 @@ export class ProductService {
     this.getCategories();
     this.db.list('/products').snapshotChanges().subscribe(
       products => { // used snapshotChanges instead of ValueCHanges just to get the key of the object
-        this.productDetails['products'] = [];
-        this.productDetails['unFilteredProducts'] = [];
+        this.productsData.products = [];
+        this.productsData.unFilteredProducts = [];
         products.forEach(
             product => {
-              this.productDetails['products'][product.key] = product.payload.val();
-              this.productDetails['unFilteredProducts'].push(product.payload.val());
+              this.productsData.products[product.key] = product.payload.val();
+              this.productsData.unFilteredProducts.push(product.payload.val() as IProductDetails);
             }
           );
 
@@ -50,9 +56,9 @@ export class ProductService {
   }
 
   getCategories() {
-    this.db.list('/categories', ref => ref.orderByChild('name')).valueChanges().subscribe(
+    this.db.list<ICategories>('/categories', ref => ref.orderByChild('name')).valueChanges().subscribe(
       categories => {
-        this.productDetails['categories'] = categories;
+        this.productsData.categories = categories;
       }
     );
   }
