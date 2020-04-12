@@ -16,7 +16,7 @@
     <ng-template #anonymousUser>
       <button class="login-button btn" routerLink="/login">Login</button>
     </ng-template>
-    <ng-container *ngIf="userData['isLoggedIn']; else anonymousUser">
+    <ng-container *ngIf="userData.isLoggedIn; else anonymousUser">
       <div class="login-button"> </div>
     </ng-container>
   </div>

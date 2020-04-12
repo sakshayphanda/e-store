@@ -5,6 +5,8 @@ import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/internal/Observable';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { GlobalDataService } from '../service/global-data.service';
+import { IUserData } from '../model/IUserData';
+import { Routes } from '../enums/Routes';
 
 @Component({
   selector: 'app-top-navigation',
@@ -18,7 +20,7 @@ export class TopNavigationComponent implements OnInit {
   totalCost = 0;
   showMenuButton = false;
   productsInCart = {};
-  userData = {};
+  userData: IUserData;
 
   constructor(
     private authService: AuthServiceService,
@@ -32,8 +34,8 @@ export class TopNavigationComponent implements OnInit {
     this.productsInCart =  this.cartService.productsInCart;
     this.userData = this.authService.userData;
 
-    if (this.userData['isLoggedIn']) {
-      this.router.navigate([''], {
+    if (this.userData.isLoggedIn) {
+      this.router.navigate([Routes.DEFAULT], {
         relativeTo: this.activatedRoute
       });
     }
@@ -46,7 +48,7 @@ export class TopNavigationComponent implements OnInit {
       this.showMenuButton = false;
     }
     window.addEventListener('resize', (event) => {
-      const width = event['currentTarget']['innerWidth'];
+      const width = event.currentTarget['innerWidth'];
 
       if (width < 900) {
         this.showMenuButton = true;

@@ -1,6 +1,4 @@
-import { CategoryService } from './../../../service/category.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AdminAuthGuardService } from './../../../service/admin-auth-guard.service';
+import { ActivatedRoute } from '@angular/router';
 import { AuthServiceService } from './../../../service/auth-service.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
@@ -26,10 +24,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   productDetails = {};
   constructor(
     private authService: AuthServiceService,
-    private adminService: AdminAuthGuardService,
     private productService: ProductService,
     private cartService: ShoppingCartService,
-    private router: Router,
     private activatedRoute: ActivatedRoute
     ) { }
 
@@ -37,9 +33,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.userDetails = this.authService.userData;
     this.productDetails = this.productService.productDetails;
     this.filteredProducts = this.productDetails['unFilteredProducts'];
-    this.adminService.adminEmail.subscribe(
-      isAdmin => this.adminState = isAdmin
-    );
     this.loadProducts();
   }
 

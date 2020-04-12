@@ -2,7 +2,10 @@ import { AuthServiceService } from './service/auth-service.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { fade } from './animations/fade';
 import { ProductService } from './service/product.service';
-import { Router } from '@angular/router';
+import { IUserData } from './model/IUserData';
+import { InternetService } from './service/internet.service';
+import { NotificationsService } from './service/notifications.service';
+import { notificationsData } from './data/notificationsData';
 
 @Component({
   selector: 'app-root',
@@ -11,38 +14,14 @@ import { Router } from '@angular/router';
   animations: [ fade ]
 })
 export class AppComponent implements OnInit, OnDestroy {
-  userData = {};
-  toShow = [];
-  notificationsObj = {
-    offline: {
-      icon: 'fas fa-exclamation-circle',
-      style: {
-        background: '#ec5656'
-      },
-      message: 'No internet',
-      buttons: [
-      ]
-    },
-    online: {
-      icon: 'fas fa-wifi',
-      style: {
-        background: '#71b971'
-      },
-      message: 'Internet is now connected',
-      buttons: [
-      ]
-    },
-    slow: {
-      style: {
-        background: '#6565e8'
-      },
-      message: 'Slow Network detected. You may experience delay in response',
-      buttons: []
-    }
-  };
+  toShow: string[];
+  userData: IUserData;
+  notificationsObj = notificationsData;
   constructor(
     private authService: AuthServiceService,
-    private productService: ProductService
+    private productService: ProductService,
+    private internetService: InternetService,
+    private notificationsService: NotificationsService
     ) {
 
     this.userData = this.authService.userData;
@@ -51,7 +30,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.internetConnectivity();
+    this.toShow = this.notificationsService.toShow;
+    this.internetService.checkInternetConnectivity();
   }
 
   btnClicked(id, $event) {
@@ -60,65 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  internetConnectivity() {
-    if (navigator.onLine) {
-      const conn = window.navigator['connection'];
-      if (conn) {
-        this.slowConnectionCheck(conn);
-      }
-    } else {
-      this.toShow.push('offline');
-    }
-    window.addEventListener('offline', event => {
-      if (this.toShow.includes('online')) {
-        const index = this.toShow.indexOf('online');
-        this.toShow.splice(index, 1);
-      }
-      if (!this.toShow.includes('offline')) {
-      this.toShow.push('offline');
-      }
-    });
-    window.addEventListener('online', event => {
-      if (this.toShow.includes('offline')) {
-        const index = this.toShow.indexOf('offline');
-        this.toShow.splice(index, 1);
-      }
-      if (!this.toShow.includes('online')) {
-      this.toShow.push('online');
-      }
-
-
-      const conn = window.navigator['connection'];
-      if (conn) {
-        this.slowConnectionCheck(conn);
-      }
-    });
-
-      navigator['connection'].addEventListener('change', () => {
-        if (navigator.onLine) {
-          const conn = window.navigator['connection'];
-          this.slowConnectionCheck(conn);
-        }
-      });
-  }
-
-  slowConnectionCheck(conn) {
-    const avoidTheseConnections = ['slow-2g', '2g' /*, '3g', '4g' */];
-    const effectiveType = conn.effectiveType || '';
-    if (avoidTheseConnections.includes(effectiveType)) {
-      if (!this.toShow.includes('slow')) {
-        this.toShow.push('slow');
-      }
-    } else {
-      if (this.toShow.includes('slow')) {
-        const index = this.toShow.indexOf('slow');
-        this.toShow.splice(index, 1);
-      }
-    }
-  }
-
   closed(id, n) {
-      console.log('closed');
       this.toShow.splice(n, 1);
   }
 
