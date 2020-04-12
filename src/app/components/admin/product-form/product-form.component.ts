@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/take';
+import { Routes } from 'src/app/enums/Routes';
 
 @Component({
   selector: 'app-product-form',
@@ -40,12 +41,12 @@ export class ProductFormComponent implements OnInit , OnDestroy{
 
   save(formValue) {
     this.productService.create(formValue);
-    this.router.navigate(['/admin/admin-products']);
+    this.router.navigate([Routes.ADMIN_PRODUCTS]);
   }
 
   update(formValue) {
     this.productService.update(formValue, this.id);
-    this.router.navigate(['/admin/admin-products']);
+    this.router.navigate([Routes.ADMIN_PRODUCTS]);
 
   }
   ngOnDestroy() {
