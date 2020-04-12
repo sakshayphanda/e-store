@@ -86,7 +86,7 @@ export class AuthServiceService {
   redirectToReturnUrl() {
     if (localStorage.getItem(LocalStorageKeys.RETURN_URL)) {
       const route = localStorage.getItem(LocalStorageKeys.RETURN_URL).split('?')[0];
-      this.router.navigate([route ? route : '']);
+      this.router.navigate([route ? route : Routes.DEFAULT]);
     } else {
       this.router.navigate([Routes.HOME]);
     }

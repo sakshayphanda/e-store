@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { AuthServiceService } from './../../../service/auth-service.service';
+import { AuthServiceService } from '../../../../service/auth-service.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
 import { ShoppingCartService } from 'src/app/service/shopping-cart.service';

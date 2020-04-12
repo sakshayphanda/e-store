@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="image-container" *ngIf="userData.isLoggedIn">
+    <img [src]="userData.userDetails.photoURL">
+    <p class="email">{{userData.userDetails.displayName}}</p>
+  </div>
+
+  <div class="image-container" *ngIf="!userData.isLoggedIn">
+    <img src="https://cdn1.iconfinder.com/data/icons/big-rocket/80/BigRocket-1-01-512.png">
+    <p class="email">Guest User</p>
+  </div>
+
+  <ng-container *ngFor="let action of actions">
+    <button *ngIf="action.auth === roles.NONE || userData.role === action.auth"
+      (click)="actionChanged($event, action.name)" class="btn btn-primary" [routerLinkActive]="['selected']"
+      [routerLink]="action.route">{{action.name !== 'Cart' ? action.name : action.name + ' (' + productsInCart.length + ')'}}</button>
+  </ng-container>
+
+  <button *ngIf="userData.isLoggedIn" (click)="logOut()" class="btn btn-primary">Logout</button>
+</div>

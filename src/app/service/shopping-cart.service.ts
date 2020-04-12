@@ -1,15 +1,14 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
+import { IProductsInCart } from '../model/IProductsInCart';
+import { defaultProductsInCart } from '../data/defaultProductsInCart';
+import { LocalStorageKeys } from '../enums/LocalStorageKeys';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  productsInCart = {
-    totalCost: 0,
-    length: 0,
-    productDetails: []
-  };
+  productsInCart: IProductsInCart = defaultProductsInCart;
   constructor(private db: AngularFireDatabase) {
    }
 
@@ -27,7 +26,7 @@ export class ShoppingCartService {
   }
 
   getCartProducts() {
-    const uid = localStorage.getItem('userId');
+    const uid = localStorage.getItem(LocalStorageKeys.USER_ID);
     if (uid) {
     this.db.list('/shopping-cart/' + uid + '/items/').snapshotChanges().subscribe(
       products => {
@@ -36,6 +35,7 @@ export class ShoppingCartService {
         products.forEach(
           product => {
             totalCost = totalCost + product.payload.val()['price'];
+            console.log(product.payload.val());
             productDetails.push({
               key: product.key,
               value: product.payload.val()
@@ -43,16 +43,16 @@ export class ShoppingCartService {
 
           }
        );
-       this.productsInCart['totalCost'] = totalCost;
-       this.productsInCart['length'] = products.length;
-       this.productsInCart['productDetails'] = productDetails;
+       this.productsInCart.totalCost = totalCost;
+       this.productsInCart.length = products.length;
+       this.productsInCart.productDetails = productDetails;
       }
     );
     }
   }
 
   removeItem(productKey) {
-    const uid = localStorage.getItem('userId');
+    const uid = localStorage.getItem(LocalStorageKeys.USER_ID);
     this.db.object('/shopping-cart/' + uid + '/items/' + productKey).remove();
   }
 

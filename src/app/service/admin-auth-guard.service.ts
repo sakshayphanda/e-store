@@ -3,6 +3,7 @@ import { CanActivate } from '@angular/router';
 import { AuthServiceService } from './auth-service.service';
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import 'rxjs/add/operator/switchMap';
+import { Roles } from '../enums/Roles';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,6 @@ import 'rxjs/add/operator/switchMap';
 export class AdminAuthGuardService implements CanActivate {
   constructor(private authService: AuthServiceService) { }
   canActivate(): boolean {
-    return this.authService.userData.role === 'admin' ? true : false;
+    return this.authService.userData.role === Roles.ADMIN ? true : false;
   }
 }

@@ -1,12 +1,12 @@
-import { AuthServiceService } from './../service/auth-service.service';
+import { AuthServiceService } from '../../service/auth-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/internal/Observable';
-import { ShoppingCartService } from '../service/shopping-cart.service';
-import { GlobalDataService } from '../service/global-data.service';
-import { IUserData } from '../model/IUserData';
-import { Routes } from '../enums/Routes';
+import { ShoppingCartService } from '../../service/shopping-cart.service';
+import { GlobalDataService } from '../../service/global-data.service';
+import { IUserData } from '../../model/IUserData';
+import { Routes } from '../../enums/Routes';
 
 @Component({
   selector: 'app-top-navigation',

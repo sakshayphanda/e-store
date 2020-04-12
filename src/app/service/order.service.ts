@@ -1,11 +1,12 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
+import { LocalStorageKeys } from '../enums/LocalStorageKeys';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  userId = localStorage.getItem('userId');
+  userId = localStorage.getItem(LocalStorageKeys.USER_ID);
 
   constructor(private db: AngularFireDatabase) { }
 

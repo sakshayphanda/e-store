@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalDataService } from '../service/global-data.service';
+import { GlobalDataService } from '../../service/global-data.service';
 
 @Component({
   selector: 'app-home',
