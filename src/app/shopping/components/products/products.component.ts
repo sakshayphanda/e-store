@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { AuthServiceService } from '../../../../../shared/services/auth-service.service';
+import { AuthServiceService } from '../../../shared/services/auth-service.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService, IProducts } from 'src/app/shared/services/product.service';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';

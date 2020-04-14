@@ -7,8 +7,10 @@ import { UserService } from './services/user.service';
 import { CategoryService } from './services/category.service';
 import { ProductService } from './services/product.service';
 import { ShoppingCartService } from './services/shopping-cart.service';
-
-
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -22,7 +24,18 @@ import { ShoppingCartService } from './services/shopping-cart.service';
     ShoppingCartService,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AngularFireModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    FormsModule
+  ],
+  exports: [
+    CommonModule,
+    FormsModule,
+    AngularFireModule,
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ]
 })
 export class SharedModule { }
