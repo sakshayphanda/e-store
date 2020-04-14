@@ -113,14 +113,14 @@ const routes: Routes = [
     NgbModule,
     FormsModule,
     BrowserAnimationsModule,
-    NotificationModule
+    NotificationModule,
+
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [
     AdminAuthGuardService,
-
   { provide: FirebaseOptionsToken, useValue: environment.firebase }
   ],
   bootstrap: [AppComponent]
