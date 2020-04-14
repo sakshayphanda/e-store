@@ -1,11 +1,11 @@
-import { AuthServiceService } from './service/auth-service.service';
+import { AuthServiceService } from './shared/services/auth-service.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { fade } from './animations/fade';
-import { ProductService } from './service/product.service';
-import { IUserData } from './model/IUserData';
-import { InternetService } from './service/internet.service';
-import { NotificationsService } from './service/notifications.service';
-import { notificationsData } from './data/notificationsData';
+import { fade } from './shared/animations/fade';
+import { ProductService } from './shared/services/product.service';
+import { IUserData } from './shared/models/interfaces/IUserData';
+import { InternetService } from './shared/services/internet.service';
+import { NotificationsService } from './shared/services/notifications.service';
+import { notificationsData } from './shared/data/notificationsData';
 
 @Component({
   selector: 'app-root',
