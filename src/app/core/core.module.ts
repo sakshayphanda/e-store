@@ -24,10 +24,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [
-    TopNavigationComponent,
-    LoginComponent,
-    HomeComponent,
-    SideNavigationComponent
+    HomeComponent
   ]
 })
 export class CoreModule { }
