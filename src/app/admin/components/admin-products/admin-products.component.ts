@@ -17,12 +17,18 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-   this.loadProductsData();
+   this.productService.getProducts().then(
+     data => {
+        this.productsData = data;
+     }
+   );
 
   }
 
   loadProductsData() {
     this.productsData = this.productService.productsData;
+    console.log(this.productsData);
+
 
   }
   delete(itemKey) {

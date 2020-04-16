@@ -10,7 +10,7 @@ import { ShoppingComponent } from './shopping.component';
 
 import { CoreModule } from '../core/core.module';
 import { LoginComponent } from '../core/components/login/login.component';
-import { AuthGuardService } from '../shared/services/auth-guard.service';
+import { AuthGuardService } from '../shared/guards/auth-guard.service';
 
 const routes: Routes = [
   {

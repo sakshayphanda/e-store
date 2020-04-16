@@ -1,4 +1,4 @@
-import { AuthServiceService } from './auth-service.service';
+import { AuthServiceService } from '../services/auth-service.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import 'rxjs/add/operator/map';

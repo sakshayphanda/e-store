@@ -13,7 +13,7 @@ export interface IProducts {
 })
 export class ProductService {
 
-  productsData: IProducts = {
+  productsData = {
     products: {},
     categories: [],
     unFilteredProducts: []
@@ -37,8 +37,9 @@ export class ProductService {
     this.getCategories();
     this.db.list('/products').snapshotChanges().subscribe(
       products => { // used snapshotChanges instead of ValueCHanges just to get the key of the object
-        this.productsData.products = [];
+        this.productsData.products = {};
         this.productsData.unFilteredProducts = [];
+
         products.forEach(
             product => {
               this.productsData.products[product.key] = product.payload.val();
@@ -46,12 +47,11 @@ export class ProductService {
             }
           );
 
-          resolve();
+          resolve(this.productsData);
         }
       );
 
     });
-
       return promise;
   }
 
