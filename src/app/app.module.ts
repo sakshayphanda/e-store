@@ -7,7 +7,6 @@ import { FirebaseOptionsToken } from 'angularfire2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationModule } from 'sp-notifications';
 import { SharedModule } from './shared/shared.module';
-import { AdminModule } from './admin/admin.module';
 import { CoreModule } from './core/core.module';
 import { ShoppingModule } from './shopping/shopping.module';
 
@@ -17,6 +16,10 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: 'src/app/admin/admin.module#AdminModule'
+  },
+    {
+    path: '',
+    loadChildren: 'src/app/shopping/shopping.module#ShoppingModule'
   }
 ];
 @NgModule({
@@ -29,9 +32,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     NotificationModule,
     SharedModule,
-    AdminModule,
     CoreModule,
-    ShoppingModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

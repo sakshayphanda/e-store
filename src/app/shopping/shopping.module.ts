@@ -15,33 +15,38 @@ import { AuthGuardService } from '../shared/guards/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    component: ShoppingComponent
-  },
-  {
-    path: 'home',
-    component: ShoppingComponent
-  },
-  {
-    path: 'check-out',
-    component: CheckOutComponent,
-    canActivate: [AuthGuardService]
-  },
-  {
-    path: 'cart',
-    component: ShoppingCartComponent
-  },
-  {
-    path: 'order-success',
-    component: OrderSuccessComponent,
-    canActivate: [AuthGuardService]
+    children: [
+      {
+        path: '',
+        component: ShoppingComponent
+      },
+      {
+        path: 'home',
+        component: ShoppingComponent
+      },
+      {
+        path: 'check-out',
+        component: CheckOutComponent,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'cart',
+        component: ShoppingCartComponent
+      },
+      {
+        path: 'order-success',
+        component: OrderSuccessComponent,
+        canActivate: [AuthGuardService]
 
-  },
-  {
-    path: 'my-orders',
-    component: MyOrdersComponent,
-    canActivate: [AuthGuardService]
+      },
+      {
+        path: 'my-orders',
+        component: MyOrdersComponent,
+        canActivate: [AuthGuardService]
 
-  }
+      }
+    ]
+  },
 ];
 
 @NgModule({
