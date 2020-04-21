@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationModule } from 'sp-notifications';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { ShoppingModule } from './shopping/shopping.module';
-
 
 // lazy loading
 const routes: Routes = [
