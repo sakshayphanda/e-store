@@ -13,11 +13,11 @@ import { CoreModule } from './core/core.module';
 const routes: Routes = [
   {
     path: 'admin',
-    loadChildren: 'src/app/admin/admin.module#AdminModule'
+    loadChildren: () => import('src/app/admin/admin.module').then(m => m.AdminModule)
   },
     {
     path: '',
-    loadChildren: 'src/app/shopping/shopping.module#ShoppingModule'
+    loadChildren: () => import('src/app/shopping/shopping.module').then(m => m.ShoppingModule)
   }
 ];
 @NgModule({
