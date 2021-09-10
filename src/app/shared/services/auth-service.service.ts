@@ -1,8 +1,6 @@
 import {
-  ActivatedRoute,
   Router,
-  NavigationEnd,
-  NavigationStart
+  NavigationEnd
 } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -25,8 +23,7 @@ export class AuthServiceService {
     private cartService: ShoppingCartService,
     private router: Router,
     private angularFireAuth: AngularFireAuth,
-    private angularFireDatabase: AngularFireDatabase,
-    private route: ActivatedRoute
+    private angularFireDatabase: AngularFireDatabase
   ) {}
 
   user: Observable<firebase.User> = this.angularFireAuth.authState;
@@ -54,15 +51,12 @@ export class AuthServiceService {
         this.userData.uid = user.uid;
         this.userData.userDetails = user.providerData[0];
         await this.userRole(user.uid);
-        this.cartService.getCartProducts();
-        this.userData.loading = false;
-        this.redirectToReturnUrl();
       } else {
-        this.cartService.getCartProducts();
         this.userData.isLoggedIn = false;
-        this.userData.loading = false;
-        this.redirectToReturnUrl();
       }
+      this.cartService.getCartProducts();
+      this.userData.loading = false;
+      this.redirectToReturnUrl();
     });
 
     this.observablesToUnsubscribe.push($userData);
@@ -88,7 +82,7 @@ export class AuthServiceService {
       const route = localStorage.getItem(LocalStorageKeys.RETURN_URL).split('?')[0];
       this.router.navigate([route ? route : Routes.DEFAULT]);
     } else {
-      this.router.navigate([Routes.HOME]);
+      this.router.navigate(['']);
     }
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

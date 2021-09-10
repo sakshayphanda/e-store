@@ -18,7 +18,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ShoppingComponent
+        redirectTo: 'home',
+        pathMatch: 'full'
       },
       {
         path: 'home',
