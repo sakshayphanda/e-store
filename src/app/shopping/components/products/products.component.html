@@ -1,8 +1,14 @@
 <div class="products">
   <div class="welcome-msg">
     <p *ngIf="userDetails.isLoggedIn; else anonymousUser">
-      <strong> Welcome, {{userDetails.userDetails?.displayName}} <span style="color: rgb(24, 133, 133)"
-          *ngIf="userDetails.role === Roles.ADMIN">Admin</span> </strong>
+      <strong>
+        Welcome, {{ userDetails.userDetails?.displayName }}
+        <span
+          style="color: rgb(24, 133, 133)"
+          *ngIf="userDetails.role === Roles.ADMIN"
+          >Admin</span
+        >
+      </strong>
     </p>
 
     <ng-template #anonymousUser>
@@ -11,29 +17,40 @@
   </div>
 
   <div class="categories-menu">
-    <button *ngIf="productsData.categories.length > 1" (click)="currentCategory = 'All';openCategory('All');"
-      class="btn" [class.selected]="currentCategory==='All'"
-      [routerLink]="Routes.HOME" [queryParams]="{category: 'All'}">All
+    <button
+      *ngIf="productsData.categories.length > 1"
+      (click)="currentCategory = ALL_CATEGORIES; openCategory(ALL_CATEGORIES)"
+      class="btn"
+      [class.selected]="currentCategory === ALL_CATEGORIES"
+      [routerLink]="Routes.HOME"
+      [queryParams]="{ category: ALL_CATEGORIES }"
+    >
+      All
     </button>
-    <button class="btn" (click)="openCategory(category.name);currentCategory = category.name"
-      *ngFor="let category of productsData.categories" [class.selected]="category.name === currentCategory"
-      [routerLink]="Routes.HOME" [queryParams]="{category: category.name}">{{category.name}}</button>
+    <button
+      class="btn"
+      (click)="openCategory(category.name); currentCategory = category.name"
+      *ngFor="let category of productsData.categories"
+      [class.selected]="category.name === currentCategory"
+      [routerLink]="Routes.HOME"
+      [queryParams]="{ category: category.name }"
+    >
+      {{ category.name }}
+    </button>
   </div>
 
   <div class="row products-container">
-
     <ng-container *ngFor="let product of filteredProducts">
       <div class="card">
-        <img class="card-image" [src]="product.imageUrl">
+        <img class="card-image" [src]="product.imageUrl" />
         <div class="product-details">
-          <p class="product-title">{{product.title}}</p>
-          <strong>{{product.price | currency:"INR":true}}</strong>
+          <p class="product-title">{{ product.title }}</p>
+          <strong>{{ product.price | currency: "INR":true }}</strong>
         </div>
         <div class="add-to-cart-btn" (click)="addToCart(product)">
-            Add to cart
+          Add to cart
         </div>
       </div>
     </ng-container>
-
   </div>
 </div>

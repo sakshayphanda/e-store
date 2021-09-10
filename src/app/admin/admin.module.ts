@@ -4,7 +4,6 @@ import { AdminOrdersComponent } from './components/admin-orders/admin-orders.com
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuardService } from '../shared/guards/auth-guard.service';
 import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
@@ -14,22 +13,18 @@ const routes: Routes = [
       {
         path: 'admin-orders',
         component: AdminOrdersComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService]
       },
       {
         path: 'products/new',
         component: ProductFormComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService]
       },
       {
         path: 'products/:id',
         component: ProductFormComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService]
       },
       {
         path: 'admin-products',
         component: AdminProductsComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService]
       }
     ]
   }

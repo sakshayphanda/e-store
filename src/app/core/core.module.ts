@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SideNavigationComponent } from './components/side-navigation/side-navigation.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
     TopNavigationComponent,
     LoginComponent,
     HomeComponent,
-    SideNavigationComponent
+    SideNavigationComponent,
+    PageNotFoundComponent
   ],
   imports: [
     SharedModule,

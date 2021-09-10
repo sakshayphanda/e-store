@@ -7,10 +7,10 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { ShoppingComponent } from './shopping.component';
-
 import { CoreModule } from '../core/core.module';
-import { LoginComponent } from '../core/components/login/login.component';
 import { AuthGuardService } from '../shared/guards/auth-guard.service';
+import { userInfoResolver } from '../shared/resolvers/userInfo.resolver';
+import { productsResolver } from '../shared/resolvers/products.resolver';
 
 const routes: Routes = [
   {
@@ -18,12 +18,16 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        pathMatch: 'full',
         redirectTo: 'home',
-        pathMatch: 'full'
+
       },
       {
         path: 'home',
-        component: ShoppingComponent
+        component: ShoppingComponent,
+        resolve: {
+          products: productsResolver
+        },
       },
       {
         path: 'check-out',
@@ -43,8 +47,7 @@ const routes: Routes = [
       {
         path: 'my-orders',
         component: MyOrdersComponent,
-        canActivate: [AuthGuardService]
-
+        canActivate: [AuthGuardService],
       }
     ]
   },
@@ -59,6 +62,7 @@ const routes: Routes = [
     MyOrdersComponent,
     ShoppingComponent
   ],
+  providers: [userInfoResolver, productsResolver],
   imports: [
     SharedModule,
     CoreModule,

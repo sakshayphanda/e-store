@@ -1,21 +1,18 @@
-import {
-  Router,
-  NavigationEnd
-} from '@angular/router';
-import { Observable } from 'rxjs/internal/Observable';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { Injectable } from '@angular/core';
-import * as firebase from 'firebase/app';
-import { UserService } from './user.service';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { ShoppingCartService } from './shopping-cart.service';
-import { IUserData } from '../../shared/models/interfaces/IUserData';
-import { defaultUserData } from '../data/defaultUserData';
-import { LocalStorageKeys } from '../enums/LocalStorageKeys';
-import { Routes } from '../enums/Routes';
+import { Router, NavigationEnd } from "@angular/router";
+import { Observable } from "rxjs/internal/Observable";
+import { AngularFireAuth } from "angularfire2/auth";
+import { Injectable } from "@angular/core";
+import * as firebase from "firebase/app";
+import { UserService } from "./user.service";
+import { AngularFireDatabase } from "angularfire2/database";
+import { ShoppingCartService } from "./shopping-cart.service";
+import { IUserData } from "../../shared/models/interfaces/IUserData";
+import { defaultUserData } from "../data/defaultUserData";
+import { LocalStorageKeys } from "../enums/LocalStorageKeys";
+import { Routes } from "../enums/Routes";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthServiceService {
   constructor(
@@ -40,9 +37,9 @@ export class AuthServiceService {
     this.angularFireAuth.auth.signOut();
   }
 
-  authenticateUser() {
+  authenticateUser(): Observable<any> {
     this.userData.loading = true;
-    const $userData = this.user.subscribe(async user => {
+    const $userData = this.user.subscribe(async (user) => {
       if (user) {
         this.userData.loading = true;
         this.userService.updateUser(user);
@@ -60,18 +57,20 @@ export class AuthServiceService {
     });
 
     this.observablesToUnsubscribe.push($userData);
+
+    return this.user;
   }
 
   userRole(uid): Promise<boolean> {
     const promise: Promise<boolean> = new Promise((resolve, reject) => {
-    this.angularFireDatabase
-      .object('/roles/' + uid)
-      .valueChanges()
-      .subscribe((userRole: string) => {
-        this.userData.role = userRole;
-        this.redirectToReturnUrl();
-        resolve(true);
-      });
+      this.angularFireDatabase
+        .object("/roles/" + uid)
+        .valueChanges()
+        .subscribe((userRole: string) => {
+          this.userData.role = userRole;
+          this.redirectToReturnUrl();
+          resolve(true);
+        });
     });
 
     return promise;
@@ -79,12 +78,15 @@ export class AuthServiceService {
 
   redirectToReturnUrl() {
     if (localStorage.getItem(LocalStorageKeys.RETURN_URL)) {
-      const route = localStorage.getItem(LocalStorageKeys.RETURN_URL).split('?')[0];
+      const route = localStorage
+        .getItem(LocalStorageKeys.RETURN_URL)
+        .split("?")[0];
       this.router.navigate([route ? route : Routes.DEFAULT]);
     } else {
-      this.router.navigate(['']);
+      this.router.navigate([Routes.DEFAULT]);
+
     }
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const route = event.urlAfterRedirects;
         if (route !== null && route !== Routes.LOGIN) {
@@ -95,7 +97,7 @@ export class AuthServiceService {
   }
 
   dispose() {
-    this.observablesToUnsubscribe.forEach(observable => {
+    this.observablesToUnsubscribe.forEach((observable) => {
       observable.unsubscribe();
     });
   }

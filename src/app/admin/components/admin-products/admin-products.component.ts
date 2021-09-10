@@ -17,7 +17,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-   this.productService.getProducts().then(
+   this.productService.getProducts().subscribe(
      data => {
         this.productsData = data;
      }

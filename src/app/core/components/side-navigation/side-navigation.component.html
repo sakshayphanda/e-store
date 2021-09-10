@@ -11,7 +11,7 @@
 
   <ng-container *ngFor="let action of actions">
     <button *ngIf="action.auth === roles.NONE || userData.role === action.auth"
-      (click)="actionChanged($event, action.name)" class="btn btn-primary" [routerLinkActive]="['selected']"
+      (click)="actionChanged($event, action.name)" class="btn btn-primary" routerLinkActive="selected"
       [routerLink]="action.route">{{action.name !== 'Cart' ? action.name : action.name + ' (' + productsInCart.length + ')'}}</button>
   </ng-container>
 
