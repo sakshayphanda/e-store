@@ -7,6 +7,7 @@ import { IUserData } from 'src/app/shared/models/interfaces/IUserData';
 import { Routes } from 'src/app/shared/enums/Routes';
 import { Roles } from 'src/app/shared/enums/Roles';
 import { LocalStorageKeys } from 'src/app/shared/enums/LocalStorageKeys';
+import { IProductDetails } from 'src/app/shared/models/interfaces/IProductDetails';
 
 @Component({
   selector: 'app-products',
@@ -16,7 +17,7 @@ import { LocalStorageKeys } from 'src/app/shared/enums/LocalStorageKeys';
 export class ProductsComponent implements OnInit, OnDestroy {
 
   userDetails: IUserData;
-  filteredProducts = [];
+  filteredProducts: IProductDetails[] = [];
   currentCategory = 'All';
   productsData: IProducts;
   Routes = Routes;
