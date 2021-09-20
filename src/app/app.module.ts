@@ -1,6 +1,10 @@
 import { environment } from "./../environments/environment";
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA, APP_INITIALIZER } from "@angular/core";
+import {
+  NgModule,
+  CUSTOM_ELEMENTS_SCHEMA,
+  APP_INITIALIZER,
+} from "@angular/core";
 import { AppComponent } from "./app.component";
 import { FirebaseOptionsToken } from "angularfire2";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -33,7 +37,8 @@ function initializeApp(): Promise<any> {
       provide: APP_INITIALIZER,
       useFactory: () => initializeApp,
       deps: [HttpClient],
-      multi: true     }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
